@@ -1,0 +1,19 @@
+package events;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class Evento extends Thread {
+  public void run() {
+  String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\banco.bd";
+
+    try (Connection conn = DriverManager.getConnection(conexao); Statement statement = conn.createStatement()) {
+      System.out.println("Conexão estabelecida com sucesso!");
+
+
+    } catch (Exception e) {
+      System.out.println("Erro de conexão: " + e.getMessage());
+    }
+  }
+}
