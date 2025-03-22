@@ -1,5 +1,4 @@
 package events.propriedades;
-import java.beans.EventSetDescriptor;
 import java.util.Scanner;
 
 import events.Evento;
@@ -10,9 +9,9 @@ public class Escolha extends Thread {
   Scanner scanner = new Scanner(System.in);
   int inicio = 0;
   public void run() {
-    System.out.println("Seja bem-vindo ao sistema de eventos!");
-		System.out.println("[-----------------------------------]");
-		System.out.println("[1] Eventos [2] Palestrante [3] Participante [0] Sair");
+    System.out.println("\nSeja bem-vindo ao sistema de eventos!\n");
+		System.out.println("[1] - Eventos \n[2] - Palestrante \n[3] - Participante \n[0] - Sair");
+    System.out.print("\nDigite a opção desejada: ");
 		inicio = scanner.nextInt();
 
     switch (inicio) {
