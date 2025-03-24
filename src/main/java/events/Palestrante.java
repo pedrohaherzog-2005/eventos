@@ -70,11 +70,11 @@ public class Palestrante extends Thread {
 
         System.out.println("+--------------------------------------------------+");
         System.out.println("\n\nÁREA DO PALESTRANTE\n\n");
-        System.out.println("[1] - Adicionar Participante");
-        System.out.println("[2] - Editar Palestrante");
-        System.out.println("[3] - Excluir Palestrante");
-        System.out.println("[4] - Listar Palestrantes");
-        System.out.println("[5] - Voltar");
+        System.out.println("[1] - ADICIONAR PALESTRANTE");
+        System.out.println("[2] - EDITAR PALESTRANTE");
+        System.out.println("[3] - EXCLUIR PALESTRANTE");
+        System.out.println("[4] - LISTAR PALESTRANTES");
+        System.out.println("[0] - VOLTAR");
         System.out.println("\n\nINFORME A OPERAÇÃO DESEJADA: \n\n");
         escolha = scan.nextInt();
         System.out.println("+--------------------------------------------------+");
@@ -92,7 +92,7 @@ public class Palestrante extends Thread {
           case 4:
             listarPalestrantes();
             break;
-          case 5:
+          case 0:
             Escolha e = new Escolha();
             break;
           default:
@@ -127,7 +127,7 @@ public class Palestrante extends Thread {
         System.out.println("NOME: " + rs.getString("nome"));
         System.out.println("CURRÍCULO: " + rs.getString("curriculo"));
         System.out.println("ÁREA DE ATUAÇÃO: " + rs.getString("atuacao"));
-        System.out.println("EVENTO PALESTRADO: " + rs.getInt("evento"));
+        System.out.println("EVENTO PALESTRADO: " + rs.getString("e.nome"));
         System.out.println("\n\n");
       }
       System.out.println("+--------------------------------------------------+");
@@ -147,13 +147,13 @@ public class Palestrante extends Thread {
 
     scan.nextLine();
 
-    System.out.println("Informe o nome do palestrante: ");
+    System.out.println("INFORME O NOME DO PALESTRANTE: ");
     this.setNome(scan.nextLine());
-    System.out.println("Informe o currículo do palestrante: ");
+    System.out.println("INFORME O CURRICULO DO PALESTRANTE: ");
     this.setCurriculo(scan.nextLine());
-    System.out.println("Informe a área de atuação do palestrante: ");
+    System.out.println("INFORME A ÁREA DE ATUAÇÃO DO PALESTRANTE: ");
     this.setAtuacao(scan.nextLine());
-    System.out.println("Informe o evento que o palestrante irá palestrar: ");
+    System.out.println("INFORME O EVENTO QUE O PALESTRANTE IRÁ PALESTRAR: ");
     this.setEvento(scan.nextInt());
     scan.nextLine();
 

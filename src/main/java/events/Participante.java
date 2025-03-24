@@ -2,6 +2,9 @@ package events;
 
 import java.sql.Statement;
 import java.util.Scanner;
+
+import events.propriedades.Escolha;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -75,12 +78,12 @@ public class Participante extends Thread {
 
       do {
         System.out.println("+--------------------------------------------------+");
-        System.out.println("\nÁrea do Participante\n");
-        System.out.println("1 - Adicionar participante");
-        System.out.println("2 - Editar participante");
-        System.out.println("3 - Excluir participante");
-        System.out.println("4 - Listar participante");
-        System.out.println("5 - Sair");
+        System.out.println("\nÁREA DO PARTICIPANTE\n");
+        System.out.println("[1] - ADICIONAR PARTICIPANTE");
+        System.out.println("[2] - EDITAR PARTICIPANTE");
+        System.out.println("[3] - EXCLUIR PARTICIPANTE");
+        System.out.println("[4] - LISTAR PARTICIPANTES");
+        System.out.println("[0] - VOLTAR");
         System.out.println("+                      -||-                        +");
         System.out.println("\nINFORME A OPERAÇÃO DESEJADA: \n");
         escolha = scan.nextInt();
@@ -99,15 +102,13 @@ public class Participante extends Thread {
           case 4:
             listarParticipantes();
             break;
-          case 5:
-            // Escolha e = new Escolha();
+          case 0:
+            Escolha e = new Escolha();
             break;
           default:
-            System.out.println("+--------------------------------------------------+");
-            System.out.println("+          +           -||-          +             +");
-            System.out.println("\n\nESTA OPÇÃO NÃO EXISTE. FAVOR TENTE NOVAMENTE\n\n");
-            System.out.println("+          +           -||-          +             +");
-            System.out.println("+--------------------------------------------------+");
+            System.err.println("+--------------------------------------------------+");
+            System.err.println("\n\nESTA OPÇÃO NÃO EXISTE. FAVOR TENTE NOVAMENTE\n\n");
+            System.err.println("+--------------------------------------------------+");
             break;
         }
 
