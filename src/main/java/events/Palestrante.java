@@ -93,7 +93,7 @@ public class Palestrante extends Thread {
             listarPalestrantes();
             break;
           case 0:
-            Escolha e = new Escolha();
+            new Escolha().start();
             break;
           default:
             System.err.println("+--------------------------------------------------+");
@@ -206,8 +206,43 @@ public class Palestrante extends Thread {
   }
 
   private void editarPalestrante(int id) {
+    String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+
+    try (Connection conn = DriverManager.getConnection(conexao)) {
+      
+      String sqlUpdate = "UPDATE palestrante SET nome = ?, curriculo = ?, atuacao = ?, evento = ? WHERE id = ?";
+      PreparedStatement pStatement = conn.prepareStatement(sqlUpdate);
+      pStatement.setString(1, this.getNome());
+      pStatement.setString(2, this.getCurriculo());
+      pStatement.setString(3, this.getAtuacao());
+      pStatement.setInt(4, id);
+      pStatement.executeUpdate();
+
+    } catch (Exception e) {
+
+      System.err.println("+------------------------------------------------------+");
+      System.err.println("\n\nNÃO FOI POSSIVEL EDITAR OS DADOS DO PARTICIPANTE\n\n");
+      System.err.println("+------------------------------------------------------+");
+
+    }
   }
 
   private void excluirPalestrante(int id) {
+    String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+
+    try (Connection conn = DriverManager.getConnection(conexao)) {
+
+      String sqlDelete = "DELETE FROM palestrante WHERE id = ?";
+      PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
+      pStatement.setInt(1, id);
+      pStatement.executeUpdate();
+
+    } catch (Exception e) {
+
+      System.err.println("+--------------------------------------------------+");
+      System.err.println("\n\n---NÃO FOI POSSIVEL EXCLUIR O PALESTRANTE---\n\n");
+      System.err.println("+--------------------------------------------------+");
+
+    }
   }
 }

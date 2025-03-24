@@ -11,19 +11,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Participante extends Thread {
+  Scanner scan = new Scanner(System.in);
 
   private String nome;
   private String cpf;
   private String dt_nascimento;
   private String sexo;
   private String inscricao;
+  private int id;
 
-  public void ctParticipante(String nome, String cpf, String dt_nascimento, String sexo, String inscricao) {
+  public void ctParticipante(String nome, String cpf, String dt_nascimento, String sexo, String inscricao, int id) {
     this.nome = nome;
     this.cpf = cpf;
     this.dt_nascimento = dt_nascimento;
     this.sexo = sexo;
     this.inscricao = inscricao;
+    this.id = id;
   }
 
   public String getNome() {
@@ -66,12 +69,19 @@ public class Participante extends Thread {
     this.inscricao = inscricao;
   }
 
+  public long getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
   public Participante() {
     String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
     try (Connection conn = DriverManager.getConnection(conexao);
-        Statement statement = conn.createStatement();
-        Scanner scan = new Scanner(System.in)) {
+        Statement statement = conn.createStatement()) {
       System.out.println("Conexão estabelecida com sucesso!");
 
       int escolha;
@@ -103,7 +113,7 @@ public class Participante extends Thread {
             listarParticipantes();
             break;
           case 0:
-            Escolha e = new Escolha();
+            new Escolha().start();
             break;
           default:
             System.err.println("+--------------------------------------------------+");
@@ -124,7 +134,6 @@ public class Participante extends Thread {
 
     try (Connection conn = DriverManager.getConnection(conexao);
         Statement stmt = conn.createStatement();) {
-
       String sqlSelect = "SELECT * FROM participante";
       ResultSet rs = stmt.executeQuery(sqlSelect);
 
@@ -143,69 +152,72 @@ public class Participante extends Thread {
 
     } catch (Exception e) {
       System.err.println("+--------------------------------------------------+");
-      System.err.println("+          +           -||-          +             +");
       System.err.println("\n\n--------ERRO AO LISTAR PARTICIPANTES--------\n\n");
-      System.err.println("+          +           -||-          +             +");
       System.err.println("+--------------------------------------------------+");
     }
   }
 
   private void adicionarParticipante(Scanner scan) {
-    System.out.println("Informe o nome do participante: ");
+    System.out.print("\nDIGITE O NOME DO PARTICIPANTE: ");
     this.setNome(scan.next());
     scan.nextLine();
-    System.out.println("Informe o CPF do participante: ");
+    System.out.print("\nDIGITE O CPF DO PARTICIPANTE: ");
     this.setCpf(scan.next());
     scan.nextLine();
-    System.out.println("Informe a data de nascimento do participante: ");
+    System.out.print("\nDIGITE A DATA DE NASCIMENTO DO PARTICIPANTE: ");
     this.setDt_nascimento(scan.next());
     scan.nextLine();
-    System.out.println("Informe o sexo do participante: ");
+    System.out.print("\nDIGITE O SEXO DO PARTICIPANTE: ");
     this.setSexo(scan.next());
     scan.nextLine();
-    System.out.println("Informe o número de inscrição do participante: ");
+    System.out.print("\nDIGITE O NOMERO DE INCRIÇÃO DO PARTICIPANTE: ");
     this.setInscricao(scan.next());
     scan.nextLine();
 
-    if (!this.getNome().isEmpty() || !this.getCpf().isEmpty() || !this.getDt_nascimento().isEmpty()
-        || !this.getSexo().isEmpty() || !this.getInscricao().isEmpty()) {
-
-      String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
-
-      try (Connection conn = DriverManager.getConnection(conexao)) {
-
-        String sqlInsert = "INSERT INTO participante (nome, cpf, dt_nascimento, sexo, inscricao) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
-        pStatement.setString(1, this.getNome());
-        pStatement.setString(2, this.getCpf());
-        pStatement.setString(3, this.getDt_nascimento());
-        pStatement.setString(4, this.getSexo());
-        pStatement.setString(5, this.getInscricao());
-        pStatement.executeUpdate();
-
-      } catch (Exception e) {
-
-        System.err.println("+--------------------------------------------------+");
-        System.err.println("+          +           -||-          +             +");
-        System.err.println("\n\n-----ERRO AO ADICIONAR UM PARTICIPANTE------\n\n");
-        System.err.println("+          +           -||-          +             +");
-        System.err.println("+--------------------------------------------------+");
-      }
-    } else {
-
-      System.err.println("+--------------------------------------------------+");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("\n\nINFORMAÇÕES INVÁLIDAS. FAVOR TENTE NOVAMENTE\n\n");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("+--------------------------------------------------+");
-    }
-  }
-
-  private void editarParticipante(int id) {
     String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
     try (Connection conn = DriverManager.getConnection(conexao)) {
+      String sqlInsert = "INSERT INTO participante (nome, cpf, dt_nascimento, sexo, inscricao) VALUES (?, ?, ?, ?, ?)";
+      PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
+      pStatement.setString(1, this.getNome());
+      pStatement.setString(2, this.getCpf());
+      pStatement.setString(3, this.getDt_nascimento());
+      pStatement.setString(4, this.getSexo());
+      pStatement.setString(5, this.getInscricao());
+      pStatement.setInt(6, (int) this.getId());
+      pStatement.executeUpdate();
 
+      } catch (Exception e) {
+        System.err.println("+--------------------------------------------------+");
+        System.err.println("\n\n------ERRO AO ADICIONAR UM PARTICIPANTE------\n\n");
+        System.out.println(e.getMessage());
+        System.err.println("+--------------------------------------------------+");
+      }
+    }
+
+  private void editarParticipante(int id) {
+    System.out.print("\nDIGITE O ID DO EVENTO: ");
+    this.setId(scan.nextInt());
+    scan.nextLine();
+    System.out.print("\nDIGITE O NOME DO PARTICIPANTE: ");
+    this.setNome(scan.next());
+    scan.nextLine();
+    System.out.print("\nDIGITE O CPF DO PARTICIPANTE: ");
+    this.setCpf(scan.next());
+    scan.nextLine();
+    System.out.print("\nDIGITE A DATA DE NASCIMENTO DO PARTICIPANTE: ");
+    this.setDt_nascimento(scan.next());
+    scan.nextLine();
+    System.out.print("\nDIGITE O SEXO DO PARTICIPANTE: ");
+    this.setSexo(scan.next());
+    scan.nextLine();
+    System.out.print("\nDIGITE O NOMERO DE INCRIÇÃO DO PARTICIPANTE: ");
+    this.setInscricao(scan.next());
+    scan.nextLine();
+
+    String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+
+    try (Connection conn = DriverManager.getConnection(conexao)) {
       String sqlUpdate = "UPDATE participante SET nome = ?, cpf = ?, dt_nascimento = ?, sexo = ?, inscricao = ? WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(sqlUpdate);
       pStatement.setString(1, this.getNome());
@@ -213,36 +225,29 @@ public class Participante extends Thread {
       pStatement.setString(3, this.getDt_nascimento());
       pStatement.setString(4, this.getSexo());
       pStatement.setString(5, this.getInscricao());
-      pStatement.setInt(6, id);
+      pStatement.setInt(6, (int) this.getId());
       pStatement.executeUpdate();
 
     } catch (Exception e) {
-
-      System.err.println("+--------------------------------------------------+");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("\n\n-ERRO AO EDITAR OS DADOS DO PARTICIPANTE----\n\n");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("+--------------------------------------------------+");
+      System.out.println("Erro ao fazer conexão" + e.getMessage());
     }
   }
 
   private void excluirParticipante(int id) {
+    System.out.print("\nDIGITE O ID DO PARTICIPANTE: ");
+    this.setId(scan.nextInt());
+    scan.nextLine();
+
     String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
     try(Connection conn = DriverManager.getConnection(conexao)) {
-      
       String sqlDelete = "DELETE FROM participante WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
-      pStatement.setInt(1, id);
+      pStatement.setInt(1, (int) this.getId());
       pStatement.executeUpdate();
 
     } catch (Exception e) {
-
-      System.err.println("+--------------------------------------------------+");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("\n\n-----ERRO AO EXCLUIR O PARTICIPANTE---------\n\n");
-      System.err.println("+          +           -||-          +             +");
-      System.err.println("+--------------------------------------------------+");
+      System.out.println("Erro ao fazer conexão" + e.getMessage());
     }
   }
 }

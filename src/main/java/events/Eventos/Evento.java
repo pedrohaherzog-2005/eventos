@@ -63,8 +63,7 @@ public class Evento extends Thread {
 
             String insert = "INSERT INTO evento (nome, descricao, data, local, capacidade, palestrante) VALUES ('"
                 + this.construtor.getNome() + "', '" + this.construtor.getDescricao() + "', '"
-                + this.construtor.getData()
-                + "', '" + this.construtor.getLocal() + "', '"
+                + this.construtor.getData() + "', '" + this.construtor.getLocal() + "', '"
                 + this.construtor.getCapacidade() + "', '" + this.construtor.getPalestrante() + "')";
 
             statement.execute(insert);
