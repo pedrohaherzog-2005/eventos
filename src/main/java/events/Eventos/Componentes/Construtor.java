@@ -1,7 +1,5 @@
 package events.Eventos.Componentes;
 
-import java.util.Scanner;
-
 public class Construtor {
   private String nome;
   private String descricao;
