@@ -170,7 +170,7 @@ public class Participante extends Thread {
     if (!this.getNome().isEmpty() || !this.getCpf().isEmpty() || !this.getDt_nascimento().isEmpty()
         || !this.getSexo().isEmpty() || !this.getInscricao().isEmpty()) {
 
-      String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\banco.bd";
+      String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
       try (Connection conn = DriverManager.getConnection(conexao)) {
 
