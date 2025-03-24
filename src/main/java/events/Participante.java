@@ -152,15 +152,20 @@ public class Participante extends Thread {
 
   private void adicionarParticipante(Scanner scan) {
     System.out.println("Informe o nome do participante: ");
-    this.setNome(scan.nextLine());
+    this.setNome(scan.next());
+    scan.nextLine();
     System.out.println("Informe o CPF do participante: ");
-    this.setCpf(scan.nextLine());
+    this.setCpf(scan.next());
+    scan.nextLine();
     System.out.println("Informe a data de nascimento do participante: ");
-    this.setDt_nascimento(scan.nextLine());
+    this.setDt_nascimento(scan.next());
+    scan.nextLine();
     System.out.println("Informe o sexo do participante: ");
-    this.setSexo(scan.nextLine());
+    this.setSexo(scan.next());
+    scan.nextLine();
     System.out.println("Informe o número de inscrição do participante: ");
-    this.setInscricao(scan.nextLine());
+    this.setInscricao(scan.next());
+    scan.nextLine();
 
     if (!this.getNome().isEmpty() || !this.getCpf().isEmpty() || !this.getDt_nascimento().isEmpty()
         || !this.getSexo().isEmpty() || !this.getInscricao().isEmpty()) {
