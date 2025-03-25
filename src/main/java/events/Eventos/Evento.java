@@ -11,12 +11,11 @@ import events.propriedades.Escolha;
 
 public class Evento extends Thread {
   Construtor construtor = new Construtor();
-
   Scanner scanner = new Scanner(System.in);
-
+  int eventoEscolha = 0;
+  String conexao;
+  
   public Evento() {
-    int eventoEscolha = 0;
-    String conexao;
     do {
       System.out.println("+--------------------------------------------------+");
       System.out.println("\n\nÁREA DE EVENTO\n\n");

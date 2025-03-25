@@ -14,12 +14,10 @@ public class Palestrante extends Thread {
   Scanner scan = new Scanner(System.in);
   Construtor construtor = new Construtor();
   String conexao;
-
+  int palestranteEscolha = 0;
+  
   public Palestrante() {
-    int palestranteEscolha = 0;
-
     do {
-
       System.out.println("+--------------------------------------------------+");
       System.out.println("\n\nÁREA DO PALESTRANTE\n\n");
       System.out.println("[1] - ADICIONAR PALESTRANTE");
