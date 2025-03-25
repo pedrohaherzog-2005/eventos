@@ -1,9 +1,9 @@
 package events.propriedades;
 import java.util.Scanner;
 
-import events.Palestrante;
 import events.Participante;
 import events.Eventos.Evento;
+import events.Palestrante.Palestrante;
 
 public class Escolha extends Thread {
   Scanner scanner = new Scanner(System.in);

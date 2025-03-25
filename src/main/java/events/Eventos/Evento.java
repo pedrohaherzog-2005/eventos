@@ -72,7 +72,7 @@ public class Evento extends Thread {
             System.out.println("+--------------------------------------------------+");
 
           } catch (Exception e) {
-            System.out.println("Erro ao fazer conexão" + e.getMessage());
+            System.out.println("ERRO AO CADASTRAR EVENTOS" + e.getMessage());
           }
           break;
 
@@ -124,7 +124,7 @@ public class Evento extends Thread {
             System.out.println("\n\nEVENTO ATUALIZADO COM SUCESSO\n\n");
             System.out.println("+--------------------------------------------------+");
           } catch (Exception e) {
-            System.out.println("Erro ao fazer conexão" + e.getMessage());
+            System.out.println("ERRO AO ATUALIZAR EVENTOS" + e.getMessage());
           }
           break;
 
@@ -145,7 +145,7 @@ public class Evento extends Thread {
             System.out.println("\n\nEVENTO DELETADO COM SUCESSO\n\n");
             System.out.println("+--------------------------------------------------+");
           } catch (Exception e) {
-            System.out.println("Erro ao fazer conexão" + e.getMessage());
+            System.out.println("ERRO AO EXLUIR EVENTOS" + e.getMessage());
           }
           break;
 
@@ -172,7 +172,7 @@ public class Evento extends Thread {
             }
             System.out.println("+--------------------------------------------------+");
           } catch (Exception e) {
-            System.out.println("Erro ao fazer conexão" + e.getMessage());
+            System.out.println("ERRO AO LISTAR EVENTOS" + e.getMessage());
           }
           break;
 
