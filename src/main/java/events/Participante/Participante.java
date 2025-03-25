@@ -164,7 +164,7 @@ public class Participante extends Thread {
     this.construtor.setId(scan.nextInt());
     scan.nextLine();
 
-    String conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+    conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
     try (Connection conn = DriverManager.getConnection(conexao)) {
       String sqlDelete = "DELETE FROM participante WHERE id = ?";
