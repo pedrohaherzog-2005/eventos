@@ -1,4 +1,5 @@
 package events.Eventos.Crud;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -13,13 +14,14 @@ public class Excluir extends Thread {
   @Override
   public void run() {
     conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+
+    System.out.print("\nDIGITE O ID DO EVENTO: ");
+    this.construtor.setId(scanner.nextInt());
+    scanner.nextLine();
+
     try {
       Connection conn = DriverManager.getConnection(conexao);
       Statement statement = conn.createStatement();
-      
-      System.out.print("\nDIGITE O ID DO EVENTO: ");
-      this.construtor.setId(scanner.nextInt());
-      scanner.nextLine();
 
       String delete = "DELETE FROM evento WHERE id = '" + this.construtor.getId() + "'";
       statement.execute(delete);

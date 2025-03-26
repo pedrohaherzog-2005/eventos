@@ -1,4 +1,5 @@
 package events.Eventos.Crud;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -13,38 +14,39 @@ public class Atualizar extends Thread {
   @Override
   public void run() {
     conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+
+    System.out.print("\nDIGITE O ID DO EVENTO: ");
+    this.construtor.setId(scanner.nextInt());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE O NOME DO EVENTO: ");
+    this.construtor.setNome(scanner.next());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE A DESCRIÇÃO DO EVENTO: ");
+    this.construtor.setDescricao(scanner.next());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE A DATA DO EVENTO: ");
+    this.construtor.setData(scanner.next());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE O LOCAL DO EVENTO: ");
+    this.construtor.setLocal(scanner.next());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE A CAPACIDADE DO EVENTO: ");
+    this.construtor.setCapacidade(scanner.nextInt());
+    scanner.nextLine();
+
+    System.out.print("\nDIGITE O PALESTRANTE DO EVENTO: ");
+    this.construtor.setPalestrante(scanner.next());
+    scanner.nextLine();
+
     try {
       Connection conn = DriverManager.getConnection(conexao);
       Statement statement = conn.createStatement();
-
-      System.out.print("\nDIGITE O ID DO EVENTO: ");
-      this.construtor.setId(scanner.nextInt());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE O NOME DO EVENTO: ");
-      this.construtor.setNome(scanner.next());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE A DESCRIÇÃO DO EVENTO: ");
-      this.construtor.setDescricao(scanner.next());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE A DATA DO EVENTO: ");
-      this.construtor.setData(scanner.next());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE O LOCAL DO EVENTO: ");
-      this.construtor.setLocal(scanner.next());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE A CAPACIDADE DO EVENTO: ");
-      this.construtor.setCapacidade(scanner.nextInt());
-      scanner.nextLine();
-
-      System.out.print("\nDIGITE O PALESTRANTE DO EVENTO: ");
-      this.construtor.setPalestrante(scanner.next());
-      scanner.nextLine();
-
+      
       String update = "UPDATE evento SET nome = '" + this.construtor.getNome() + "', descricao = '"
           + this.construtor.getDescricao()
           + "', data = '" + this.construtor.getData() + "', local = '" + this.construtor.getLocal()

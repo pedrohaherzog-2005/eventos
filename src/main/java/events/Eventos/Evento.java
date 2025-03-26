@@ -1,6 +1,5 @@
 package events.Eventos;
 import java.util.Scanner;
-import events.Eventos.Componentes.Construtor;
 import events.Eventos.Crud.Atualizar;
 import events.Eventos.Crud.Excluir;
 import events.Eventos.Crud.Inserir;
@@ -8,10 +7,8 @@ import events.Eventos.Crud.Leitura;
 import events.propriedades.Escolha;
 
 public class Evento extends Thread {
-  Construtor construtor = new Construtor();
   Scanner scanner = new Scanner(System.in);
   int eventoEscolha = 0;
-  String conexao;
   
   public Evento() {
     do {
