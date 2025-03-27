@@ -23,18 +23,18 @@ public class Leitura extends Thread {
       System.out.println("\nLISTA DE EVENTOS\n");
       ResultSet rs = statement.executeQuery(sqlSelect);
       while (rs.next()) {
-        System.out.println("ID: " + rs.getInt("ID"));
-        System.out.println("NOME: " + rs.getString("NOME"));
-        System.out.println("DESCRIÇÃO: " + rs.getString("DESCRICAO"));
-        System.out.println("DATA: " + rs.getString("DATA"));
-        System.out.println("LOCAL: " + rs.getString("LOCAL"));
-        System.out.println("CAPACIDADE: " + rs.getInt("CAPACIDADE"));
-        System.out.println("PALESTRANTE: " + rs.getInt("PALESTRANTE"));
+        System.out.println("Id: " + rs.getInt("ID"));
+        System.out.println("Nome: " + rs.getString("NOME"));
+        System.out.println("Descrição: " + rs.getString("DESCRICAO"));
+        System.out.println("Data: " + rs.getString("DATA"));
+        System.out.println("Local: " + rs.getString("LOCAL"));
+        System.out.println("Capacidade: " + rs.getInt("CAPACIDADE"));
+        System.out.println("Palestrante: " + rs.getInt("PALESTRANTE"));
         System.out.println("\n\n");
       }
       System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
-      System.out.println("ERRO AO LISTAR EVENTOS" + e.getMessage());
+      System.out.println("Erro ao listar eventos! " + e.getMessage());
     }
   }
 }

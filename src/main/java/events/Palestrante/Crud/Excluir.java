@@ -20,7 +20,8 @@ public class Excluir extends Thread {
     this.construtor.setId(scanner.nextInt());
     scanner.nextLine();
 
-    try (Connection conn = DriverManager.getConnection(conexao)) {
+    try {
+      Connection conn = DriverManager.getConnection(conexao);
 
       String sqlDelete = "DELETE FROM palestrante WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(sqlDelete);

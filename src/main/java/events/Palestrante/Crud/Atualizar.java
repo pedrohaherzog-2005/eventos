@@ -34,7 +34,8 @@ public class Atualizar  extends Thread {
     this.construtor.setEvento(scanner.nextInt());
     scanner.nextLine();
 
-    try (Connection conn = DriverManager.getConnection(conexao)) {
+    try {
+      Connection conn = DriverManager.getConnection(conexao);
 
       String sqlUpdate = "UPDATE palestrante SET nome = ?, curriculo = ?, atuacao = ?, evento = ? WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(sqlUpdate);
