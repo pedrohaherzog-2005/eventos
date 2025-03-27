@@ -30,7 +30,7 @@ public class Atualizar  extends Thread {
     this.construtor.setAtuacao(scanner.next());
     scanner.nextLine();
 
-    System.out.print("\nDIGITE O EVENTO QUE O PALESTRANTE IRÁ PALESTRAR: ");
+    System.out.print("\nDIGITE O ID DO EVENTO QUE O PALESTRANTE IRÁ PALESTRAR: ");
     this.construtor.setEvento(scanner.nextInt());
     scanner.nextLine();
 
@@ -41,9 +41,12 @@ public class Atualizar  extends Thread {
       pStatement.setString(1, this.construtor.getNome());
       pStatement.setString(2, this.construtor.getCurriculo());
       pStatement.setString(3, this.construtor.getAtuacao());
-      pStatement.setInt(4, (int) this.construtor.getId());
+      pStatement.setInt(4, (int) this.construtor.getEvento());
+      pStatement.setInt(5, (int) this.construtor.getId());
       pStatement.executeUpdate();
-
+      System.out.println("+--------------------------------------------------+");
+      System.out.println("\n\nPALESTRANTE ATUALIZADO COM SUCESSO\n\n");
+      System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
 
       System.err.println("+------------------------------------------------------+");

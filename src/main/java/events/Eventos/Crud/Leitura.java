@@ -29,7 +29,7 @@ public class Leitura extends Thread {
         System.out.println("DATA: " + rs.getString("DATA"));
         System.out.println("LOCAL: " + rs.getString("LOCAL"));
         System.out.println("CAPACIDADE: " + rs.getInt("CAPACIDADE"));
-        System.out.println("PALESTRANTE: " + rs.getString("PALESTRANTE"));
+        System.out.println("PALESTRANTE: " + rs.getInt("PALESTRANTE"));
         System.out.println("\n\n");
       }
       System.out.println("+--------------------------------------------------+");

@@ -36,7 +36,7 @@ public class Inserir extends Thread {
     scanner.nextLine();
 
     System.out.print("\nDIGITE O PALESTRANTE DO EVENTO: ");
-    this.construtor.setPalestrante(scanner.next());
+    this.construtor.setPalestrante(scanner.nextInt());
     scanner.nextLine();
 
     try {

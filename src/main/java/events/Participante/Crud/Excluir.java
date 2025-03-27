@@ -27,7 +27,9 @@ public class Excluir extends Thread {
       PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
       pStatement.setInt(1, (int) this.construtor.getId());
       pStatement.executeUpdate();
-
+      System.out.println("+--------------------------------------------------+");
+      System.out.println("\n\nPARTICIPANTE EXCLUIDO COM SUCESSO\n\n");
+      System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
       System.out.println("Erro ao fazer conexão" + e.getMessage());
     }

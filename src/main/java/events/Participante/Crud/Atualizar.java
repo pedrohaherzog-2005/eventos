@@ -15,21 +15,26 @@ public class Atualizar extends Thread {
   public void run() {
     conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
 
-    System.out.print("\nDIGITE O ID DO EVENTO: ");
+    System.out.print("\nDIGITE O ID DO PARTICIPANTE: ");
     this.construtor.setId(scanner.nextInt());
     scanner.nextLine();
+
     System.out.print("\nDIGITE O NOME DO PARTICIPANTE: ");
     this.construtor.setNome(scanner.next());
     scanner.nextLine();
+
     System.out.print("\nDIGITE O CPF DO PARTICIPANTE: ");
     this.construtor.setCpf(scanner.next());
     scanner.nextLine();
+
     System.out.print("\nDIGITE A DATA DE NASCIMENTO DO PARTICIPANTE: ");
     this.construtor.setDt_nascimento(scanner.next());
     scanner.nextLine();
+
     System.out.print("\nDIGITE O SEXO DO PARTICIPANTE: ");
     this.construtor.setSexo(scanner.next());
     scanner.nextLine();
+    
     System.out.print("\nDIGITE O NOMERO DE INCRIÇÃO DO PARTICIPANTE: ");
     this.construtor.setInscricao(scanner.next());
     scanner.nextLine();
@@ -46,7 +51,9 @@ public class Atualizar extends Thread {
       pStatement.setString(5, this.construtor.getInscricao());
       pStatement.setInt(6, (int) this.construtor.getId());
       pStatement.executeUpdate();
-
+      System.out.println("+--------------------------------------------------+");
+      System.out.println("\n\nPARTICIPANTE ATUALIZADO COM SUCESSO\n\n");
+      System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
       System.out.println("Erro ao fazer conexão" + e.getMessage());
     }
