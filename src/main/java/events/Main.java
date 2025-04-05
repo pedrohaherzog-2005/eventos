@@ -7,7 +7,7 @@ public class Main {
 		int start = 0;
 		do {
 			Escolha escolha = new Escolha();
-			escolha.start();
+			escolha.run();
 		} while (start != 0);
 	}
 }

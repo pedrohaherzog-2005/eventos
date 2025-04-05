@@ -1,16 +1,15 @@
 package events.Palestrante;
 import java.util.Scanner;
-import events.Palestrante.Crud.Atualizar;
-import events.Palestrante.Crud.Inserir;
-import events.Palestrante.Crud.Leitura;
-import events.Palestrante.Crud.Excluir;
 import events.propriedades.Escolha;
+import events.Interface.Crud;
+import events.Palestrante.Crud.Actions;
 
-public class Palestrante extends Thread {
+public class Palestrante  {
   Scanner scan = new Scanner(System.in);
   int palestranteEscolha = 0;
-  
-  public Palestrante() {
+  Crud actions = new Actions();
+  public void run() {
+    actions.Conexao();
     do {
       System.out.println("+--------------------------------------------------+");
       System.out.println("\n\nÁREA DO PALESTRANTE\n\n");
@@ -22,19 +21,18 @@ public class Palestrante extends Thread {
       System.out.println("\n\nINFORME A OPERAÇÃO DESEJADA: \n\n");
       palestranteEscolha = scan.nextInt();
       System.out.println("+--------------------------------------------------+");
-
       switch (palestranteEscolha) {
         case 1:
-          new Inserir().run();;
+          actions.Inserir();
           break;
         case 2:
-          new Atualizar().run();;
+          actions.Atualizar();
           break;
         case 3:
-          new Excluir().run();
+          actions.Excluir();
           break;
         case 4:
-          new Leitura().run();
+          actions.Leitura();
           break;
         case 0:
           new Escolha().run();
@@ -45,7 +43,6 @@ public class Palestrante extends Thread {
           System.err.println("+--------------------------------------------------+");
           break;
       }
-
     } while (palestranteEscolha != 5);
   }
 }

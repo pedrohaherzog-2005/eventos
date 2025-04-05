@@ -1,48 +1,43 @@
 package events.Eventos;
 import java.util.Scanner;
-import events.Eventos.Crud.Atualizar;
-import events.Eventos.Crud.Excluir;
-import events.Eventos.Crud.Inserir;
-import events.Eventos.Crud.Leitura;
+import events.Eventos.Crud.Actions;
+import events.Interface.Crud;
 import events.propriedades.Escolha;
 
-public class Evento extends Thread {
+public class Evento {
   Scanner scanner = new Scanner(System.in);
   int eventoEscolha = 0;
-  
-  public Evento() {
-    do {
-      System.out.println("+--------------------------------------------------+");
-      System.out.println("\n\nÁREA DE EVENTO\n\n");
-      System.out.println("[1] - ADICIONAR EVENTO");
-      System.out.println("[2] - EDITAR EVENTO");
-      System.out.println("[3] - EXCLUIR EVENTO");
-      System.out.println("[4] - LISTAR EVENTOS");
-      System.out.println("[0] - VOLTAR");
-      System.out.println("\n\nINFORME A OPERAÇÃO DESEJADA: \n\n");
-      eventoEscolha = scanner.nextInt();
-      System.out.println("+--------------------------------------------------+");
+  Crud actions = new Actions();
 
+  public void run() {
+    actions.Conexao();
+    do {
+      System.out.print("\nÁrea de Evento\n");
+      System.out.print("\n[1] - Adicionar Evento");
+      System.out.print("\n[2] - Editar Evento");
+      System.out.print("\n[3] - Excluir Evento");
+      System.out.print("\n[4] - Listar Eventos");
+      System.out.print("\n[0] - Voltar");
+      System.out.print("\nInforme a operação desejada\n");
+      eventoEscolha = scanner.nextInt();
       switch (eventoEscolha) {
         case 1:
-          new Inserir().run();
+          actions.Inserir();
           break;
         case 2:
-          new Atualizar().run();
+          actions.Atualizar();
           break;
         case 3:
-          new Excluir().run();
+          actions.Excluir();
           break;
         case 4:
-          new Leitura().run();
+          actions.Leitura();
           break;
         case 0:
-          new Escolha().start();
+          new Escolha().run();
           break;
         default:
-          System.err.println("+--------------------------------------------------+");
-          System.err.println("\n\nESTA OPÇÃO NÃO EXISTE. FAVOR TENTE NOVAMENTE\n\n");
-          System.err.println("+--------------------------------------------------+");
+          System.err.print("\nEssa operação não existe! tente novamente\n");
           break;
       }
     } while (eventoEscolha != 0);
