@@ -18,15 +18,19 @@ public class Inserir extends Thread {
     System.out.print("\nDIGITE O NOME DO PARTICIPANTE: ");
     this.construtor.setNome(scanner.next());
     scanner.nextLine();
+
     System.out.print("\nDIGITE O CPF DO PARTICIPANTE: ");
     this.construtor.setCpf(scanner.next());
     scanner.nextLine();
+
     System.out.print("\nDIGITE A DATA DE NASCIMENTO DO PARTICIPANTE: ");
     this.construtor.setDt_nascimento(scanner.next());
     scanner.nextLine();
+    
     System.out.print("\nDIGITE O SEXO DO PARTICIPANTE: ");
     this.construtor.setSexo(scanner.next());
     scanner.nextLine();
+    
     System.out.print("\nDIGITE O NOMERO DE INCRIÇÃO DO PARTICIPANTE: ");
     this.construtor.setInscricao(scanner.next());
     scanner.nextLine();
@@ -43,7 +47,9 @@ public class Inserir extends Thread {
       pStatement.setString(5, this.construtor.getInscricao());
       pStatement.setInt(6, (int) this.construtor.getId());
       pStatement.executeUpdate();
-
+      System.out.println("+--------------------------------------------------+");
+      System.out.println("\n\nPARTICIPANTE ADICIONADO COM SUCESSO\n\n");
+      System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
       System.err.println("+--------------------------------------------------+");
       System.err.println("\n\n------ERRO AO ADICIONAR UM PARTICIPANTE------\n\n");

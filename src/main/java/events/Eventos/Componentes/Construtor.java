@@ -6,10 +6,10 @@ public class Construtor {
   private String data;
   private String local;
   private int capacidade;
-  private String palestrante;
+  private int palestrante;
   private int id;
 
-  public void ctEvento(String nome, String descricao, String data, String local, int capacidade, String palestrante, int id) {
+  public void ctEvento(String nome, String descricao, String data, String local, int capacidade, int palestrante, int id) {
     this.nome = nome;
     this.descricao = descricao;
     this.data = data;
@@ -50,11 +50,11 @@ public class Construtor {
     this.local = local;
   }
 
-  public String getPalestrante() {
+  public long getPalestrante() {
     return palestrante;
   }
 
-  public void setPalestrante(String palestrante) {
+  public void setPalestrante(int palestrante) {
     this.palestrante = palestrante;
   }
 
@@ -73,5 +73,4 @@ public class Construtor {
   public void setId(int id) {
     this.id = id;
   }
-
 }
