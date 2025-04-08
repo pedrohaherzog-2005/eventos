@@ -17,22 +17,22 @@ public class Actions implements Crud {
 
   @Override
   public void Conexao() {
-    this.conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\bd";
+    this.conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\banco";
   }
 
   @Override
   public void Inserir() {
-    System.out.print("\nDigite o nome do evento: ");
+    System.out.print("\nCadastre evento [Nome]: ");
     this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nDigite a descrição do evento: ");
+    System.out.print("\nCadastre evento [Descrição]: ");
     this.construtor.setDescricao(scanner.nextLine());
-    System.out.print("\nDigite a data do evento em formato yyyy/mm/dd: ");
+    System.out.print("\nCadastre evento [Data]: ");
     this.construtor.setData(scanner.nextLine());
-    System.out.print("\nDigite a localização do evento: ");
-    this.construtor.setLocal(scanner.next());
-    System.out.print("\nDigite a capacidade do evento: ");
+    System.out.print("\nCadastre evento [Local]: ");
+    this.construtor.setLocal(scanner.nextLine());
+    System.out.print("\nCadastre evento [Capacidade]: ");
     this.construtor.setCapacidade(scanner.nextInt());
-    System.out.print("\nDigite o id do palestrante associado ao evento: ");
+    System.out.print("\nCadastre evento [Id palestrante]: ");
     this.construtor.setPalestrante(scanner.nextInt());
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
@@ -55,28 +55,20 @@ public class Actions implements Crud {
 
   @Override
   public void Atualizar() {
-    System.out.println("Caso não queira atualizar o dado, escreva o mesmo valor que já está cadastrado.");
-    System.out.print("\nInforme o id do evento que será atualizado: ");
+    System.out.print("\nInforme o id do evento: ");
     this.construtor.setId(scanner.nextInt());
-    scanner.nextLine();
-    System.out.print("\nInforme o novo nome do evento: ");
-    this.construtor.setNome(scanner.next());
-    scanner.nextLine();
-    System.out.print("\nInforme a nova descrição do evento: ");
-    this.construtor.setDescricao(scanner.next());
-    scanner.nextLine();
-    System.out.print("\nInforme a nova data do evento: ");
-    this.construtor.setData(scanner.next());
-    scanner.nextLine();
-    System.out.print("\nInforme a nova localidade do evento: ");
-    this.construtor.setLocal(scanner.next());
-    scanner.nextLine();
-    System.out.print("\nInforme a nova capacidade do evento: ");
+    System.out.print("\nAtualize evento [Nome]: ");
+    this.construtor.setNome(scanner.nextLine());
+    System.out.print("\nAtualize evento [Descrição]: ");
+    this.construtor.setDescricao(scanner.nextLine());
+    System.out.print("\nAtualize evento [Data]: ");
+    this.construtor.setData(scanner.nextLine());
+    System.out.print("\nAtualize evento [Local]: ");
+    this.construtor.setLocal(scanner.nextLine());
+    System.out.print("\nAtualize evento [Capacidade]: ");
     this.construtor.setCapacidade(scanner.nextInt());
-    scanner.nextLine();
-    System.out.print("\nInforme o novo id do palestrante associado ao evento: ");
+    System.out.print("\nAtualize evento [Id palestrante]: ");
     this.construtor.setPalestrante(scanner.nextInt());
-    scanner.nextLine();
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String update = "UPDATE evento SET nome = ?, descricao = ?, data = ?, local = ?, capacidade = ?, palestrante = ? WHERE id = ?";
@@ -100,9 +92,8 @@ public class Actions implements Crud {
 
   @Override
   public void Excluir() {
-    System.out.print("\nInforme o id do evento que será excluido: ");
+    System.out.print("\nApagar evento [Id]: ");
     this.construtor.setId(scanner.nextInt());
-    scanner.nextLine();
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String sqlDelete = "DELETE FROM evento WHERE id = ?";
@@ -119,24 +110,20 @@ public class Actions implements Crud {
 
   @Override
   public void Leitura() {
-    try {
-      Connection conn = DriverManager.getConnection(this.conexao);
+    try (Connection conn = DriverManager.getConnection(this.conexao);) {
       Statement statement = conn.createStatement();
       String sqlSelect = "select e.id, e.nome, e.descricao, e.data, e.local, e.capacidade, e.palestrante from evento e";
-      System.out.println("+--------------------------------------------------+");
-      System.out.println("\nLISTA DE EVENTOS\n");
+      System.out.print("\nLista de eventos\n");
       ResultSet rs = statement.executeQuery(sqlSelect);
       while (rs.next()) {
-        System.out.println("Id: " + rs.getInt("ID"));
-        System.out.println("Nome: " + rs.getString("NOME"));
-        System.out.println("Descrição: " + rs.getString("DESCRICAO"));
-        System.out.println("Data: " + rs.getString("DATA"));
-        System.out.println("Local: " + rs.getString("LOCAL"));
-        System.out.println("Capacidade: " + rs.getInt("CAPACIDADE"));
-        System.out.println("Palestrante: " + rs.getInt("PALESTRANTE"));
-        System.out.println("\n\n");
+        System.out.println("Id: " + rs.getInt("id"));
+        System.out.println("Nome: " + rs.getString("nome"));
+        System.out.println("Descrição: " + rs.getString("descricao"));
+        System.out.println("Data: " + rs.getString("data"));
+        System.out.println("Local: " + rs.getString("local"));
+        System.out.println("Capacidade: " + rs.getInt("capacidade"));
+        System.out.println("Palestrante: " + rs.getInt("palestrante"));
       }
-      System.out.println("+--------------------------------------------------+");
     } catch (Exception e) {
       System.out.println("Erro ao listar eventos! " + e.getMessage());
     }

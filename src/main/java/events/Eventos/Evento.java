@@ -18,7 +18,7 @@ public class Evento {
       System.out.print("\n[3] - Excluir Evento");
       System.out.print("\n[4] - Listar Eventos");
       System.out.print("\n[0] - Voltar");
-      System.out.print("\nInforme a operação desejada\n");
+      System.out.print("\nInforme a operação desejada: ");
       eventoEscolha = scanner.nextInt();
       switch (eventoEscolha) {
         case 1:
