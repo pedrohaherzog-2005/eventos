@@ -116,7 +116,7 @@ public class Actions implements Crud {
         System.out.println("Data de Nascimento: " + rs.getString("DT_NASCIMENTO"));
         System.out.println("Sexo: " + rs.getString("SEXO"));
         System.out.println("Inscrição: " + rs.getString("INSCRICAO"));
-        System.out.println("\n\n");
+        System.out.println("\n");
       }
     } catch (Exception e) {
       System.err.print("\nErro ao listar! " + e.getMessage());

@@ -116,6 +116,7 @@ public class Actions implements Crud {
         System.out.println("Curriculo: " + rs.getString("curriculo"));
         System.out.println("Atuacao: " + rs.getString("atuacao"));
         System.out.println("Evento: " + rs.getString("evento"));
+        System.out.println("\n");
       }
     } catch (Exception e) {
       System.out.println("Erro ao listar eventos! " + e.getMessage());
