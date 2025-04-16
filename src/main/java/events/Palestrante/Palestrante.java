@@ -1,26 +1,26 @@
 package events.Palestrante;
+
 import java.util.Scanner;
 import events.propriedades.Escolha;
 import events.Interface.Crud;
 import events.Palestrante.Crud.Actions;
 
-public class Palestrante  {
+public class Palestrante {
   Scanner scan = new Scanner(System.in);
-  int palestranteEscolha = 0;
+  int palestranteEscolha;
   Crud actions = new Actions();
+
   public void run() {
     actions.Conexao();
     do {
-      System.out.println("+--------------------------------------------------+");
-      System.out.println("\n\nÁREA DO PALESTRANTE\n\n");
-      System.out.println("[1] - ADICIONAR PALESTRANTE");
-      System.out.println("[2] - EDITAR PALESTRANTE");
-      System.out.println("[3] - EXCLUIR PALESTRANTE");
-      System.out.println("[4] - LISTAR PALESTRANTES");
-      System.out.println("[0] - VOLTAR");
-      System.out.println("\n\nINFORME A OPERAÇÃO DESEJADA: \n\n");
+      System.out.print("\nÁrea do Palestrante\n");
+      System.out.print("\n[1] - Adicionar Palestrante");
+      System.out.print("\n[2] - Editar Palestrante");
+      System.out.print("\n[3] - Excluir Palestrante");
+      System.out.print("\n[4] - Listar Palestrantes");
+      System.out.print("\n[0] - Voltar");
+      System.out.print("\nInforme a operação desejada: ");
       palestranteEscolha = scan.nextInt();
-      System.out.println("+--------------------------------------------------+");
       switch (palestranteEscolha) {
         case 1:
           actions.Inserir();
@@ -38,9 +38,7 @@ public class Palestrante  {
           new Escolha().run();
           break;
         default:
-          System.err.println("+--------------------------------------------------+");
-          System.err.println("\n\nESTA OPÇÃO NÃO EXISTE. FAVOR TENTE NOVAMENTE\n\n");
-          System.err.println("+--------------------------------------------------+");
+          System.err.print("\nEssa operação não existe! Encerrando...\n");
           break;
       }
     } while (palestranteEscolha != 5);

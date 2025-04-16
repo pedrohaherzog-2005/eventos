@@ -88,7 +88,7 @@ public class Actions implements Crud {
     System.out.print("\nApagar participante [Id]: ");
     this.construtor.setId(scanner.nextInt());
     try (Connection conn = DriverManager.getConnection(this.conexao);) {
-      conn.setAutoCommit(false); 
+      conn.setAutoCommit(false);
       String sqlDelete = "DELETE FROM participante WHERE id = ?";
       try (PreparedStatement pStatement = conn.prepareStatement(sqlDelete);) {
         pStatement.setInt(1, (int) this.construtor.getId());
