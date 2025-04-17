@@ -20,7 +20,20 @@ public class Palestrante {
       System.out.print("\n[4] - Listar Palestrantes");
       System.out.print("\n[0] - Voltar");
       System.out.print("\nInforme a operação desejada: ");
-      palestranteEscolha = scan.nextInt();
+      try {
+        if (scan.hasNextInt()) {
+          palestranteEscolha = scan.nextInt();
+          scan.nextLine();
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scan.next();
+          continue;
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scan.nextLine();
+        continue;
+      }
       switch (palestranteEscolha) {
         case 1:
           actions.Inserir();

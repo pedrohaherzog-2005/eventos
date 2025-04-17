@@ -22,14 +22,55 @@ public class Actions implements Crud {
 
   @Override
   public void Inserir() {
-    System.out.print("\nCadastre palestrante [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nCadastre palestrante [Curriculo]: ");
-    this.construtor.setCurriculo(scanner.nextLine());
-    System.out.print("\nCadastre palestrante [Área atuação]: ");
-    this.construtor.setAtuacao(scanner.nextLine());
-    System.out.print("\nCadastre palestrante [Id evento]: ");
-    this.construtor.setEvento(scanner.nextInt());
+    String nome;
+    do {
+      System.out.print("\nCadastre palestrante [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String curriculo;
+    do {
+      System.out.print("\nCadastre palestrante [Curriculo]: ");
+      curriculo = scanner.nextLine();
+      if (curriculo.trim().isEmpty()) {
+        System.err.print("\nCurrículo não pode ser vazio! Tente novamente.\n");
+      }
+    } while (curriculo.trim().isEmpty());
+    this.construtor.setCurriculo(curriculo);
+
+    String atuacao;
+    do {
+      System.out.print("\nCadastre palestrante [Área atuação]: ");
+      atuacao = scanner.nextLine();
+      if (atuacao.trim().isEmpty()) {
+        System.err.print("\nÁrea de atuação não pode ser vazia! Tente novamente.\n");
+      }
+    } while (atuacao.trim().isEmpty());
+    this.construtor.setAtuacao(atuacao);
+
+    int evento;
+    while (true) {
+      System.out.print("\nCadastre palestrante [Id evento]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          evento = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setEvento(evento);
+
     try (Connection conn = DriverManager.getConnection(this.conexao);) {
       String sqlCheckStmt = "SELECT COUNT(*) AS total FROM evento WHERE id = ?";
       PreparedStatement checkStatement = conn.prepareStatement(sqlCheckStmt);
@@ -57,16 +98,74 @@ public class Actions implements Crud {
 
   @Override
   public void Atualizar() {
-    System.out.print("\nInforme o id do palestrante: ");
-    this.construtor.setId(scanner.nextInt());
-    System.out.print("\nAtualize palestrante [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nAtualize palestrante [Curriculo]: ");
-    this.construtor.setCurriculo(scanner.nextLine());
-    System.out.print("\nAtualize palestrante [Área atuação]: ");
-    this.construtor.setAtuacao(scanner.nextLine());
-    System.out.print("\nAtualize palestrante [Id evento]: ");
-    this.construtor.setEvento(scanner.nextInt());
+    int id;
+    while (true) {
+      System.out.print("\nInforme o id do palestrante: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
+    String nome;
+    do {
+      System.out.print("\nAtualize palestrante [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String curriculo;
+    do {
+      System.out.print("\nAtualize palestrante [Curriculo]: ");
+      curriculo = scanner.nextLine();
+      if (curriculo.trim().isEmpty()) {
+        System.err.print("\nCurrículo não pode ser vazio! Tente novamente.\n");
+      }
+    } while (curriculo.trim().isEmpty());
+    this.construtor.setCurriculo(curriculo);
+
+    String atuacao;
+    do {
+      System.out.print("\nAtualize palestrante [Área atuação]: ");
+      atuacao = scanner.nextLine();
+      if (atuacao.trim().isEmpty()) {
+        System.err.print("\nÁrea de atuação não pode ser vazia! Tente novamente.\n");
+      }
+    } while (atuacao.trim().isEmpty());
+    this.construtor.setAtuacao(atuacao);
+
+    int evento;
+    while (true) {
+      System.out.print("\nAtualize palestrante [Id evento]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          evento = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setEvento(evento);
+
     try (Connection conn = DriverManager.getConnection(this.conexao);) {
       conn.setAutoCommit(false);
       String sqlUpdate = "UPDATE palestrante SET nome = ?, curriculo = ?, atuacao = ?, evento = ? WHERE id = ?";
@@ -87,8 +186,25 @@ public class Actions implements Crud {
 
   @Override
   public void Excluir() {
-    System.out.print("\nApagar palestrante [Id]: ");
-    this.construtor.setId(scanner.nextInt());
+    int id;
+    while (true) {
+      System.out.print("\nApagar palestrante [Id]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
     try (Connection conn = DriverManager.getConnection(this.conexao);) {
       conn.setAutoCommit(false);
       String sqlDelete = "DELETE FROM palestrante WHERE id = ?";

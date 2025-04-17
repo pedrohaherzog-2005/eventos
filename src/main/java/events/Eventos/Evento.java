@@ -8,7 +8,6 @@ public class Evento {
   Scanner scanner = new Scanner(System.in);
   int eventoEscolha = 0;
   Crud actions = new Actions();
-
   public void run() {
     actions.Conexao();
     do {
@@ -19,7 +18,19 @@ public class Evento {
       System.out.print("\n[4] - Listar Eventos");
       System.out.print("\n[0] - Voltar");
       System.out.print("\nInforme a operação desejada: ");
-      eventoEscolha = scanner.nextInt();
+      try {
+        if (scanner.hasNextInt()) {
+          eventoEscolha = scanner.nextInt();
+        } else {
+          System.err.print("\nEntrada inválida! Por favor, insira um número.\n");
+          scanner.next();
+          continue;
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+        continue;
+      }
       switch (eventoEscolha) {
         case 1:
           actions.Inserir();
@@ -37,7 +48,7 @@ public class Evento {
           new Escolha().run();
           break;
         default:
-          System.err.print("\nEssa operação não existe! tente novamente\n");
+          System.err.print("\nEssa operação não existe! Tente novamente.\n");
           break;
       }
     } while (eventoEscolha != 0);

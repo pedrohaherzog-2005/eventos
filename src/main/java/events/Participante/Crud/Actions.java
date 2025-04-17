@@ -22,16 +22,56 @@ public class Actions implements Crud {
 
   @Override
   public void Inserir() {
-    System.out.print("\nCadastre participante [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nCadastre participante [Cpf]: ");
-    this.construtor.setCpf(scanner.nextLine());
-    System.out.print("\nCadastre participante [Data nascimento]: ");
-    this.construtor.setDt_nascimento(scanner.nextLine());
-    System.out.print("\nCadastre participante [Sexo]: ");
-    this.construtor.setSexo(scanner.nextLine());
-    System.out.print("\nCadastre participante [Id evento]: ");
-    this.construtor.setInscricao(scanner.nextLine());
+    String nome;
+    do {
+      System.out.print("\nCadastre participante [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String cpf;
+    do {
+      System.out.print("\nCadastre participante [Cpf]: ");
+      cpf = scanner.nextLine();
+      if (cpf.trim().isEmpty()) {
+        System.err.print("\nCPF não pode ser vazio! Tente novamente.\n");
+      }
+    } while (cpf.trim().isEmpty());
+    this.construtor.setCpf(cpf);
+
+    String dt_nascimento;
+    do {
+      System.out.print("\nCadastre participante [Data nascimento]: ");
+      dt_nascimento = scanner.nextLine();
+      if (dt_nascimento.trim().isEmpty()) {
+        System.err.print("\nData de nascimento não pode ser vazia! Tente novamente.\n");
+      }
+    } while (dt_nascimento.trim().isEmpty());
+    this.construtor.setDt_nascimento(dt_nascimento);
+
+    String sexo;
+    do {
+      System.out.print("\nCadastre participante [Sexo]: ");
+      sexo = scanner.nextLine();
+      if (sexo.trim().isEmpty()) {
+        System.err.print("\nSexo não pode ser vazio! Tente novamente.\n");
+      }
+    } while (sexo.trim().isEmpty());
+    this.construtor.setSexo(sexo);
+
+    String inscricao;
+    do {
+      System.out.print("\nCadastre participante [Id evento]: ");
+      inscricao = scanner.nextLine();
+      if (inscricao.trim().isEmpty()) {
+        System.err.print("\nID do evento não pode ser vazio! Tente novamente.\n");
+      }
+    } while (inscricao.trim().isEmpty());
+    this.construtor.setInscricao(inscricao);
+
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String sqlInsert = "INSERT INTO participante (nome, cpf, dt_nascimento, sexo, inscricao) VALUES (?, ?, ?, ?, ?)";
@@ -52,18 +92,75 @@ public class Actions implements Crud {
 
   @Override
   public void Atualizar() {
-    System.out.print("\nInforme o id do participante: ");
-    this.construtor.setId(scanner.nextInt());
-    System.out.print("\nAtualize participante [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nAtualize participante [Cpf]: ");
-    this.construtor.setCpf(scanner.nextLine());
-    System.out.print("\nAtualize participante [Data nascimento]: ");
-    this.construtor.setDt_nascimento(scanner.nextLine());
-    System.out.print("\nAtualize participante [Sexo]: ");
-    this.construtor.setSexo(scanner.nextLine());
-    System.out.print("\nAtualize participante [Id evento]: ");
-    this.construtor.setInscricao(scanner.nextLine());
+    int id;
+    while (true) {
+      System.out.print("\nInforme o id do participante: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
+    String nome;
+    do {
+      System.out.print("\nAtualize participante [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String cpf;
+    do {
+      System.out.print("\nAtualize participante [Cpf]: ");
+      cpf = scanner.nextLine();
+      if (cpf.trim().isEmpty()) {
+        System.err.print("\nCPF não pode ser vazio! Tente novamente.\n");
+      }
+    } while (cpf.trim().isEmpty());
+    this.construtor.setCpf(cpf);
+
+    String dt_nascimento;
+    do {
+      System.out.print("\nAtualize participante [Data nascimento]: ");
+      dt_nascimento = scanner.nextLine();
+      if (dt_nascimento.trim().isEmpty()) {
+        System.err.print("\nData de nascimento não pode ser vazia! Tente novamente.\n");
+      }
+    } while (dt_nascimento.trim().isEmpty());
+    this.construtor.setDt_nascimento(dt_nascimento);
+
+    String sexo;
+    do {
+      System.out.print("\nAtualize participante [Sexo]: ");
+      sexo = scanner.nextLine();
+      if (sexo.trim().isEmpty()) {
+        System.err.print("\nSexo não pode ser vazio! Tente novamente.\n");
+      }
+    } while (sexo.trim().isEmpty());
+    this.construtor.setSexo(sexo);
+
+    String inscricao;
+    do {
+      System.out.print("\nAtualize participante [Id evento]: ");
+      inscricao = scanner.nextLine();
+      if (inscricao.trim().isEmpty()) {
+        System.err.print("\nID do evento não pode ser vazio! Tente novamente.\n");
+      }
+    } while (inscricao.trim().isEmpty());
+    this.construtor.setInscricao(inscricao);
+
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String sqlUpdate = "UPDATE participante SET nome = ?, cpf = ?, dt_nascimento = ?, sexo = ?, inscricao = ? WHERE id = ?";
@@ -85,8 +182,25 @@ public class Actions implements Crud {
 
   @Override
   public void Excluir() {
-    System.out.print("\nApagar participante [Id]: ");
-    this.construtor.setId(scanner.nextInt());
+    int id;
+    while (true) {
+      System.out.print("\nApagar participante [Id]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
     try (Connection conn = DriverManager.getConnection(this.conexao);) {
       conn.setAutoCommit(false);
       String sqlDelete = "DELETE FROM participante WHERE id = ?";

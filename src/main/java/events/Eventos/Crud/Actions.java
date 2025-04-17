@@ -22,18 +22,84 @@ public class Actions implements Crud {
 
   @Override
   public void Inserir() {
-    System.out.print("\nCadastre evento [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nCadastre evento [Descrição]: ");
-    this.construtor.setDescricao(scanner.nextLine());
-    System.out.print("\nCadastre evento [Data]: ");
-    this.construtor.setData(scanner.nextLine());
-    System.out.print("\nCadastre evento [Local]: ");
-    this.construtor.setLocal(scanner.nextLine());
-    System.out.print("\nCadastre evento [Capacidade]: ");
-    this.construtor.setCapacidade(scanner.nextInt());
-    System.out.print("\nCadastre evento [Id palestrante]: ");
-    this.construtor.setPalestrante(scanner.nextInt());
+    String nome;
+    do {
+      System.out.print("\nCadastre evento [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome == null || nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome == null || nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String descricao;
+    do {
+      System.out.print("\nCadastre evento [Descrição]: ");
+      descricao = scanner.nextLine();
+      if (descricao == null || descricao.trim().isEmpty()) {
+        System.err.print("\nDescrição não pode ser vazia! Tente novamente.\n");
+      }
+    } while (descricao == null || descricao.trim().isEmpty());
+    this.construtor.setDescricao(descricao);
+
+    String data;
+    do {
+      System.out.print("\nCadastre evento [Data]: ");
+      data = scanner.nextLine();
+      if (data == null || data.trim().isEmpty()) {
+        System.err.print("\nData não pode ser vazia! Tente novamente.\n");
+      }
+    } while (data == null || data.trim().isEmpty());
+    this.construtor.setData(data);
+
+    String local;
+    do {
+      System.out.print("\nCadastre evento [Local]: ");
+      local = scanner.nextLine();
+      if (local == null || local.trim().isEmpty()) {
+        System.err.print("\nLocal não pode ser vazio! Tente novamente.\n");
+      }
+    } while (local == null || local.trim().isEmpty());
+    this.construtor.setLocal(local);
+
+    int capacidade;
+    while (true) {
+      System.out.print("\nCadastre evento [Capacidade]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          capacidade = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setCapacidade(capacidade);
+
+    int palestrante;
+    while (true) {
+      System.out.print("\nCadastre evento [Id palestrante]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          palestrante = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setPalestrante(palestrante);
+
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String sqlInsert = "INSERT INTO evento (nome, descricao, data, local, capacidade, palestrante) VALUES (?, ?, ?, ?, ?, ?)";
@@ -55,20 +121,103 @@ public class Actions implements Crud {
 
   @Override
   public void Atualizar() {
-    System.out.print("\nInforme o id do evento: ");
-    this.construtor.setId(scanner.nextInt());
-    System.out.print("\nAtualize evento [Nome]: ");
-    this.construtor.setNome(scanner.nextLine());
-    System.out.print("\nAtualize evento [Descrição]: ");
-    this.construtor.setDescricao(scanner.nextLine());
-    System.out.print("\nAtualize evento [Data]: ");
-    this.construtor.setData(scanner.nextLine());
-    System.out.print("\nAtualize evento [Local]: ");
-    this.construtor.setLocal(scanner.nextLine());
-    System.out.print("\nAtualize evento [Capacidade]: ");
-    this.construtor.setCapacidade(scanner.nextInt());
-    System.out.print("\nAtualize evento [Id palestrante]: ");
-    this.construtor.setPalestrante(scanner.nextInt());
+    int id;
+    while (true) {
+      System.out.print("\nInforme o id do evento: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
+    String nome;
+    do {
+      System.out.print("\nAtualize evento [Nome]: ");
+      nome = scanner.nextLine();
+      if (nome == null || nome.trim().isEmpty()) {
+        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
+      }
+    } while (nome == null || nome.trim().isEmpty());
+    this.construtor.setNome(nome);
+
+    String descricao;
+    do {
+      System.out.print("\nAtualize evento [Descrição]: ");
+      descricao = scanner.nextLine();
+      if (descricao == null || descricao.trim().isEmpty()) {
+        System.err.print("\nDescrição não pode ser vazia! Tente novamente.\n");
+      }
+    } while (descricao == null || descricao.trim().isEmpty());
+    this.construtor.setDescricao(descricao);
+
+    String data;
+    do {
+      System.out.print("\nAtualize evento [Data]: ");
+      data = scanner.nextLine();
+      if (data == null || data.trim().isEmpty()) {
+        System.err.print("\nData não pode ser vazia! Tente novamente.\n");
+      }
+    } while (data == null || data.trim().isEmpty());
+    this.construtor.setData(data);
+
+    String local;
+    do {
+      System.out.print("\nAtualize evento [Local]: ");
+      local = scanner.nextLine();
+      if (local == null || local.trim().isEmpty()) {
+        System.err.print("\nLocal não pode ser vazio! Tente novamente.\n");
+      }
+    } while (local == null || local.trim().isEmpty());
+    this.construtor.setLocal(local);
+
+    int capacidade;
+    while (true) {
+      System.out.print("\nAtualize evento [Capacidade]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          capacidade = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setCapacidade(capacidade);
+
+    int palestrante;
+    while (true) {
+      System.out.print("\nAtualize evento [Id palestrante]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          palestrante = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setPalestrante(palestrante);
+
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String update = "UPDATE evento SET nome = ?, descricao = ?, data = ?, local = ?, capacidade = ?, palestrante = ? WHERE id = ?";
@@ -92,8 +241,25 @@ public class Actions implements Crud {
 
   @Override
   public void Excluir() {
-    System.out.print("\nApagar evento [Id]: ");
-    this.construtor.setId(scanner.nextInt());
+    int id;
+    while (true) {
+      System.out.print("\nApagar evento [Id]: ");
+      try {
+        if (scanner.hasNextInt()) {
+          id = scanner.nextInt();
+          scanner.nextLine();
+          break;
+        } else {
+          System.err.print("\nEntrada inválida! Insira um número.\n");
+          scanner.next();
+        }
+      } catch (Exception e) {
+        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
+        scanner.nextLine();
+      }
+    }
+    this.construtor.setId(id);
+
     try (Connection conn = DriverManager.getConnection(this.conexao)) {
       conn.setAutoCommit(false);
       String sqlDelete = "DELETE FROM evento WHERE id = ?";
