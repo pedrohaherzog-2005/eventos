@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 import events.dao.ParticipanteDao;
 import events.dao.Interface.Crud;
-import events.propriedades.Escolha;
+import events.dao.propriedades.Escolha;
 
 public class Participante {
   Scanner scan = new Scanner(System.in);

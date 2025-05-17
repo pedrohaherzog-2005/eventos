@@ -1,15 +1,17 @@
-package events.dao.Contrutores;
+package events.dao.contrutores;
+
+import javax.swing.JTextField;
 
 public class EventoConstrutor {
-  private String nome;
-  private String descricao;
-  private String data;
-  private String local;
-  private int capacidade;
-  private int palestrante;
-  private int id;
+  private JTextField nome;
+  private JTextField descricao;
+  private JTextField data;
+  private JTextField local;
+  private JTextField capacidade;
+  private JTextField palestrante;
+  private JTextField id;
 
-  public void ctEvento(String nome, String descricao, String data, String local, int capacidade, int palestrante, int id) {
+  public void ctEvento(JTextField nome, JTextField descricao, JTextField data, JTextField local, JTextField capacidade, JTextField palestrante, JTextField id) {
     this.nome = nome;
     this.descricao = descricao;
     this.data = data;
@@ -18,59 +20,59 @@ public class EventoConstrutor {
     this.palestrante = palestrante;
   }
 
-  public String getNome() {
+  public JTextField getNome() {
     return nome;
   }
 
-  public void setNome(String nome) {
+  public void setNome(JTextField nome) {
     this.nome = nome;
   }
 
-  public String getDescricao() {
+  public JTextField getDescricao() {
     return descricao;
   }
 
-  public void setDescricao(String descricao) {
+  public void setDescricao(JTextField descricao) {
     this.descricao = descricao;
   }
 
-  public String getData() {
+  public JTextField getData() {
     return data;
   }
 
-  public void setData(String data) {
+  public void setData(JTextField data) {
     this.data = data;
   }
 
-  public String getLocal() {
+  public JTextField getLocal() {
     return local;
   }
 
-  public void setLocal(String local) {
+  public void setLocal(JTextField local) {
     this.local = local;
   }
 
-  public long getPalestrante() {
+  public JTextField getPalestrante() {
     return palestrante;
   }
 
-  public void setPalestrante(int palestrante) {
+  public void setPalestrante(JTextField palestrante) {
     this.palestrante = palestrante;
   }
 
-  public int getCapacidade() {
+  public JTextField getCapacidade() {
     return capacidade;
   }
 
-  public void setCapacidade(int capacidade) {
+  public void setCapacidade(JTextField capacidade) {
     this.capacidade = capacidade;
   }
 
-  public long getId() {
+  public JTextField getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(JTextField id) {
     this.id = id;
   }
 }

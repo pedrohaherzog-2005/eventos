@@ -1,4 +1,4 @@
-package events.dao.Contrutores;
+package events.dao.contrutores;
 
 public class ParticipanteConstrutor {
   private String nome;

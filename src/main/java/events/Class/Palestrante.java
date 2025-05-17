@@ -1,9 +1,10 @@
 package events.Class;
 
 import java.util.Scanner;
-import events.propriedades.Escolha;
+
 import events.dao.PalestranteDao;
 import events.dao.Interface.Crud;
+import events.dao.propriedades.Escolha;
 
 public class Palestrante {
   Scanner scan = new Scanner(System.in);
