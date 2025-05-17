@@ -3,14 +3,14 @@ package events.swing;
 import javax.swing.*;
 
 import events.dao.EventoDao;
-import events.dao.contrutores.EventoConstrutor;
+import events.dao.Contrutores.EventoConstrutor;
 import events.dao.propriedades.Menu.Head;
 
 import java.awt.*;
 
 public class EventosSwing {
-  static EventoConstrutor construtor = new EventoConstrutor();
-  static EventoDao eventoDao = new EventoDao(construtor);
+  EventoConstrutor construtor = new EventoConstrutor();
+  EventoDao eventoDao = new EventoDao(construtor);
 
   public static void main(String[] args) {
     Tela tela = new Tela();

@@ -14,6 +14,8 @@ public class EventoDao implements Crud {
   private String conexao;
   public EventoConstrutor construtor;
 
+  public EventoDao() {}
+
   public EventoDao(EventoConstrutor construtor) {
     this.construtor = construtor;
   }
@@ -90,33 +92,34 @@ public class EventoDao implements Crud {
 
   @Override
   public void Leitura() {
-      // Provide a default implementation or throw an exception if not used
-      throw new UnsupportedOperationException("Leitura() without parameters is not supported. Use Leitura(JTextArea textArea) instead.");
+    // Provide a default implementation or throw an exception if not used
+    throw new UnsupportedOperationException(
+        "Leitura() without parameters is not supported. Use Leitura(JTextArea textArea) instead.");
   }
-  
+
   public void Leitura(JTextArea textArea) {
-      StringBuilder sb = new StringBuilder();
-      try {
-        String sqlSelect = "select e.id, e.nome, e.descricao, e.data, e.local, e.capacidade, e.palestrante from evento e";
-        Connection conn = DriverManager.getConnection(this.conexao);
-        Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery(sqlSelect);
-        while (rs.next()) {
-          sb.append("Id: ").append(rs.getInt("id")).append("\n");
-          sb.append("Nome: ").append(rs.getString("nome")).append("\n");
-          sb.append("Descrição: ").append(rs.getString("descricao")).append("\n");
-          sb.append("Data: ").append(rs.getString("data")).append("\n");
-          sb.append("Local: ").append(rs.getString("local")).append("\n");
-          sb.append("Capacidade: ").append(rs.getInt("capacidade")).append("\n");
-          sb.append("Palestrante: ").append(rs.getInt("palestrante")).append("\n\n");
-        }
-        textArea.setText(sb.toString());
-        rs.close();
-        statement.close();
-        conn.close();
-      } catch (Exception e) {
-        textArea.setText("Erro ao listar eventos! " + e.getMessage());
-        e.printStackTrace();
+    StringBuilder sb = new StringBuilder();
+    try {
+      String sqlSelect = "select e.id, e.nome, e.descricao, e.data, e.local, e.capacidade, e.palestrante from evento e";
+      Connection conn = DriverManager.getConnection(this.conexao);
+      Statement statement = conn.createStatement();
+      ResultSet rs = statement.executeQuery(sqlSelect);
+      while (rs.next()) {
+        sb.append("Id: ").append(rs.getInt("id")).append("\n");
+        sb.append("Nome: ").append(rs.getString("nome")).append("\n");
+        sb.append("Descrição: ").append(rs.getString("descricao")).append("\n");
+        sb.append("Data: ").append(rs.getString("data")).append("\n");
+        sb.append("Local: ").append(rs.getString("local")).append("\n");
+        sb.append("Capacidade: ").append(rs.getInt("capacidade")).append("\n");
+        sb.append("Palestrante: ").append(rs.getInt("palestrante")).append("\n\n");
       }
+      textArea.setText(sb.toString());
+      rs.close();
+      statement.close();
+      conn.close();
+    } catch (Exception e) {
+      textArea.setText("Erro ao listar eventos! " + e.getMessage());
+      e.printStackTrace();
     }
+  }
 }
