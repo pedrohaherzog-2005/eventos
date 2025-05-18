@@ -1,13 +1,15 @@
-package events.dao.Contrutores;
+package events.dao.contrutores;
+
+import javax.swing.JTextField;
 
 public class PalestranteConstrutor {
-  private String nome;
-  private String curriculo;
-  private String atuacao;
-  private Integer evento;
-  private int id;
+  private JTextField nome;
+  private JTextField curriculo;
+  private JTextField atuacao;
+  private JTextField evento;
+  private JTextField id;
 
-  public void ctPalestrante(String nome, String curriculo, String atuacao, Integer evento, int id) {
+  public void ctPalestrante(JTextField nome, JTextField curriculo, JTextField atuacao, JTextField evento, JTextField id) {
     this.nome = nome;
     this.curriculo = curriculo;
     this.atuacao = atuacao;
@@ -15,43 +17,43 @@ public class PalestranteConstrutor {
     this.id = id;
   }
 
-  public long getId() {
+  public JTextField getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(JTextField id) {
     this.id = id;
   }
 
-  public String getNome() {
+  public JTextField getNome() {
     return nome;
   }
 
-  public void setNome(String nome) {
+  public void setNome(JTextField nome) {
     this.nome = nome;
   }
 
-  public String getCurriculo() {
+  public JTextField getCurriculo() {
     return curriculo;
   }
 
-  public void setCurriculo(String curriculo) {
+  public void setCurriculo(JTextField curriculo) {
     this.curriculo = curriculo;
   }
 
-  public String getAtuacao() {
+  public JTextField getAtuacao() {
     return atuacao;
   }
 
-  public void setAtuacao(String atuacao) {
+  public void setAtuacao(JTextField atuacao) {
     this.atuacao = atuacao;
   }
 
-  public Integer getEvento() {
+  public JTextField getEvento() {
     return evento;
   }
 
-  public void setEvento(Integer evento) {
+  public void setEvento(JTextField evento) {
     this.evento = evento;
   }
 }

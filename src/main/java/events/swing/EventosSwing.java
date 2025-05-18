@@ -1,16 +1,13 @@
 package events.swing;
 
 import javax.swing.*;
-
 import events.dao.EventoDao;
-import events.dao.Contrutores.EventoConstrutor;
 import events.dao.propriedades.Menu.Head;
-
 import java.awt.*;
 
 public class EventosSwing {
-  EventoConstrutor construtor = new EventoConstrutor();
-  EventoDao eventoDao = new EventoDao(construtor);
+  static events.dao.contrutores.EventoConstrutor construtor = new events.dao.contrutores.EventoConstrutor();
+  static EventoDao eventoDao = new EventoDao(construtor);
 
   public static void main(String[] args) {
     Tela tela = new Tela();
@@ -43,18 +40,30 @@ public class EventosSwing {
       setLayout(null);
 
       CampoNome campoNome = new CampoNome();
+      add(campoNome);
+
       CampoDescricao campoDescricao = new CampoDescricao();
+      add(campoDescricao);
+
       CampoData campoData = new CampoData();
+      add(campoData);
+
       CampoLocal campoLocal = new CampoLocal();
+      add(campoLocal);
+
       CampoCapacidade campoCapacidade = new CampoCapacidade();
+      add(campoCapacidade);
+
       CampoPalestrante campoPalestrante = new CampoPalestrante();
+      add(campoPalestrante);
 
       JButton botaoSalvar = new JButton("Salvar");
-      botaoSalvar.setBounds(50, 450, 200, 50);
+      botaoSalvar.setBounds(50, 450, 100, 40);
       botaoSalvar.setFont(new Font("Arial", Font.PLAIN, 14));
       botaoSalvar.setForeground(Color.white);
       botaoSalvar.setBackground(Color.black);
       botaoSalvar.setBorder(BorderFactory.createEtchedBorder());
+      botaoSalvar.setFocusable(false);
       botaoSalvar.addActionListener(e -> {
         EventoDao eventoDao = new EventoDao(construtor);
         eventoDao.Conexao();
@@ -68,15 +77,15 @@ public class EventosSwing {
         eventoDao.Conexao();
         eventoDao.Leitura(visualizar.getTextArea());
       });
-
-      add(botaoVisualizar);
       add(visualizar);
-      add(campoCapacidade);
-      add(campoPalestrante);
-      add(campoLocal);
-      add(campoData);
-      add(campoDescricao);
-      add(campoNome);
+
+      BotaoAtualizar botaoAtualizar = new BotaoAtualizar();
+      botaoAtualizar.addActionListener(e -> {
+        eventoDao.Conexao();
+        eventoDao.Atualizar();
+      });
+      add(botaoAtualizar);
+
     }
   }
 
@@ -195,12 +204,25 @@ public class EventosSwing {
 
   public static class BotaoVisualizar extends JButton {
     public BotaoVisualizar() {
-      setBounds(300, 450, 200, 50);
+      setBounds(300, 450, 100, 40);
       setFont(new Font("Arial", Font.PLAIN, 14));
       setForeground(Color.white);
       setBackground(Color.black);
       setBorder(BorderFactory.createEtchedBorder());
-      setText("Visualizar Eventos");
+      setText("Visualizar");
+      setFocusable(false);
+    }
+  }
+
+  public static class BotaoAtualizar extends JButton {
+    public BotaoAtualizar() {
+      setBounds(50, 450, 100, 40);
+      setFont(new Font("Arial", Font.PLAIN, 14));
+      setForeground(Color.white);
+      setBackground(Color.black);
+      setBorder(BorderFactory.createEtchedBorder());
+      setText("Atualizar");
+      setFocusable(false);
     }
   }
 }

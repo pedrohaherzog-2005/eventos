@@ -5,16 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import javax.swing.JTextArea;
-
 import events.dao.contrutores.EventoConstrutor;
 
 public class EventoDao implements Crud {
   private String conexao;
   public EventoConstrutor construtor;
-
-  public EventoDao() {}
 
   public EventoDao(EventoConstrutor construtor) {
     this.construtor = construtor;
@@ -31,10 +27,10 @@ public class EventoDao implements Crud {
       String sqlInsert = "INSERT INTO evento (nome, descricao, data, local, capacidade, palestrante) VALUES (?, ?, ?, ?, ?, ?)";
       Connection conn = DriverManager.getConnection(this.conexao);
       PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
-      pStatement.setString(1, String.valueOf(this.construtor.getNome()));
-      pStatement.setString(2, String.valueOf(this.construtor.getDescricao()));
-      pStatement.setString(3, String.valueOf(this.construtor.getData()));
-      pStatement.setString(4, String.valueOf(this.construtor.getLocal()));
+      pStatement.setString(1, this.construtor.getNome().getText());
+      pStatement.setString(2, this.construtor.getDescricao().getText());
+      pStatement.setString(3, this.construtor.getData().getText());
+      pStatement.setString(4, this.construtor.getLocal().getText());
       pStatement.setInt(5, Integer.parseInt(this.construtor.getCapacidade().getText()));
       pStatement.setInt(6, Integer.parseInt(this.construtor.getPalestrante().getText()));
       System.out.println("Resposta: " + pStatement.executeUpdate());
@@ -54,10 +50,10 @@ public class EventoDao implements Crud {
       String update = "UPDATE evento SET nome = ?, descricao = ?, data = ?, local = ?, capacidade = ?, palestrante = ? WHERE id = ?";
       Connection conn = DriverManager.getConnection(this.conexao);
       PreparedStatement pStatement = conn.prepareStatement(update);
-      pStatement.setString(1, String.valueOf(this.construtor.getNome()));
-      pStatement.setString(2, String.valueOf(this.construtor.getDescricao()));
-      pStatement.setString(3, String.valueOf(this.construtor.getData()));
-      pStatement.setString(4, String.valueOf(this.construtor.getLocal()));
+      pStatement.setString(1, this.construtor.getNome().getText());
+      pStatement.setString(2, this.construtor.getDescricao().getText());
+      pStatement.setString(3, this.construtor.getData().getText());
+      pStatement.setString(4, this.construtor.getLocal().getText());
       pStatement.setInt(5, Integer.parseInt(this.construtor.getCapacidade().getText()));
       pStatement.setInt(6, Integer.parseInt(this.construtor.getPalestrante().getText()));
       pStatement.setInt(7, Integer.parseInt(this.construtor.getId().getText()));
@@ -92,7 +88,6 @@ public class EventoDao implements Crud {
 
   @Override
   public void Leitura() {
-    // Provide a default implementation or throw an exception if not used
     throw new UnsupportedOperationException(
         "Leitura() without parameters is not supported. Use Leitura(JTextArea textArea) instead.");
   }
