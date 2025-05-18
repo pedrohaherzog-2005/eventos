@@ -13,7 +13,7 @@ import events.dao.PalestranteDao;
 import events.dao.propriedades.Menu.Head;
 
 public class PalestranteSwing {
-  static events.dao.contrutores.PalestranteConstrutor construtor = new events.dao.contrutores.PalestranteConstrutor();
+  static events.dao.Contrutores.PalestranteConstrutor construtor = new events.dao.Contrutores.PalestranteConstrutor();
   static PalestranteDao palestranteDao = new PalestranteDao(construtor);
 
   public static void main(String[] args) {

@@ -6,7 +6,7 @@ import events.dao.propriedades.Menu.Head;
 import java.awt.*;
 
 public class EventosSwing {
-  static events.dao.contrutores.EventoConstrutor construtor = new events.dao.contrutores.EventoConstrutor();
+  static events.dao.Contrutores.EventoConstrutor construtor = new events.dao.Contrutores.EventoConstrutor();
   static EventoDao eventoDao = new EventoDao(construtor);
 
   public static void main(String[] args) {

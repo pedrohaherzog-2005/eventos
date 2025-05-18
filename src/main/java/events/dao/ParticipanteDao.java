@@ -1,4 +1,4 @@
-/*package events.dao;
+package events.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import events.dao.Interface.Crud;
-import events.dao.contrutores.ParticipanteConstrutor;
+import events.dao.Contrutores.ParticipanteConstrutor;
 
 public class ParticipanteDao implements Crud {
   Scanner scanner = new Scanner(System.in);
@@ -247,4 +246,4 @@ public class ParticipanteDao implements Crud {
       System.out.println("Erro");
     }
   }
-}*/
+}

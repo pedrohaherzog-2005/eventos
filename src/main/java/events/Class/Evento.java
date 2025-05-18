@@ -2,8 +2,7 @@ package events.Class;
 import java.util.Scanner;
 
 import events.dao.EventoDao;
-import events.dao.Interface.Crud;
-import events.dao.propriedades.Escolha;
+import events.dao.Crud;
 
 public class Evento {
   Scanner scanner = new Scanner(System.in);
@@ -46,7 +45,7 @@ public class Evento {
           actions.Leitura();
           break;
         case 0:
-          new Escolha().run();
+          new Evento().run();
           break;
         default:
           System.err.print("\nEssa operação não existe! Tente novamente.\n");

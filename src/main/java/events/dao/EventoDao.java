@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JTextArea;
-import events.dao.contrutores.EventoConstrutor;
+import events.dao.Contrutores.EventoConstrutor;
 
 public class EventoDao implements Crud {
   private String conexao;

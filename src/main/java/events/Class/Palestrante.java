@@ -3,8 +3,7 @@ package events.Class;
 import java.util.Scanner;
 
 import events.dao.PalestranteDao;
-import events.dao.Interface.Crud;
-import events.dao.propriedades.Escolha;
+import events.dao.Crud;
 
 public class Palestrante {
   Scanner scan = new Scanner(System.in);
@@ -49,7 +48,7 @@ public class Palestrante {
           actions.Leitura();
           break;
         case 0:
-          new Escolha().run();
+          new Palestrante().run();
           break;
         default:
           System.err.print("\nEssa operação não existe! Encerrando...\n");

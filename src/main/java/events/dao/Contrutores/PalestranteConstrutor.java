@@ -1,4 +1,4 @@
-package events.dao.contrutores;
+package events.dao.Contrutores;
 
 import javax.swing.JTextField;
 

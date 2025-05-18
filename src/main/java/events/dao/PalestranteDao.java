@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JTextArea;
-import events.dao.contrutores.PalestranteConstrutor;
+import events.dao.Contrutores.PalestranteConstrutor;
 
 public class PalestranteDao implements Crud {
   private String conexao;
