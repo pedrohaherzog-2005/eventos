@@ -57,8 +57,11 @@ public class EventosSwing {
       CampoPalestrante campoPalestrante = new CampoPalestrante();
       add(campoPalestrante);
 
+      CampoId campoId = new CampoId();
+      add(campoId);
+
       JButton botaoSalvar = new JButton("Salvar");
-      botaoSalvar.setBounds(50, 450, 100, 40);
+      botaoSalvar.setBounds(50, 430, 90, 40);
       botaoSalvar.setFont(new Font("Arial", Font.PLAIN, 14));
       botaoSalvar.setForeground(Color.white);
       botaoSalvar.setBackground(Color.black);
@@ -72,20 +75,49 @@ public class EventosSwing {
       add(botaoSalvar);
 
       Visualizar visualizar = new Visualizar(eventoDao);
-      BotaoVisualizar botaoVisualizar = new BotaoVisualizar();
+      visualizar.setBounds(290, 50, 450, 350);
+      visualizar.setBackground(Color.white);
+      visualizar.setLayout(null);
+      add(visualizar);
+      
+      JButton botaoVisualizar = new JButton("Visualizar");
+      botaoVisualizar.setBounds(160, 430, 90, 40);
+      botaoVisualizar.setFont(new Font("Arial", Font.PLAIN, 14));
+      botaoVisualizar.setForeground(Color.white);
+      botaoVisualizar.setBackground(Color.black);
+      botaoVisualizar.setBorder(BorderFactory.createEtchedBorder());
+      botaoVisualizar.setFocusable(false);
       botaoVisualizar.addActionListener(e -> {
         eventoDao.Conexao();
         eventoDao.Leitura(visualizar.getTextArea());
       });
-      add(visualizar);
+      add(botaoVisualizar);
 
-      BotaoAtualizar botaoAtualizar = new BotaoAtualizar();
+      JButton botaoAtualizar = new JButton("Atualizar");
+      botaoAtualizar.setBounds(510, 430, 90, 40);
+      botaoAtualizar.setFont(new Font("Arial", Font.PLAIN, 14));
+      botaoAtualizar.setForeground(Color.white);
+      botaoAtualizar.setBackground(Color.black);
+      botaoAtualizar.setBorder(BorderFactory.createEtchedBorder());
+      botaoAtualizar.setFocusable(false);
       botaoAtualizar.addActionListener(e -> {
         eventoDao.Conexao();
         eventoDao.Atualizar();
       });
       add(botaoAtualizar);
 
+      JButton botaoExcluir = new JButton("Excluir");
+      botaoExcluir.setBounds(620, 430, 90, 40);
+      botaoExcluir.setFont(new Font("Arial", Font.PLAIN, 14));
+      botaoExcluir.setForeground(Color.white);
+      botaoExcluir.setBackground(Color.black);
+      botaoExcluir.setBorder(BorderFactory.createEtchedBorder());
+      botaoExcluir.setFocusable(false);
+      botaoExcluir.addActionListener(e -> {
+        eventoDao.Conexao();
+        eventoDao.Excluir();
+      });
+      add(botaoExcluir);
     }
   }
 
@@ -173,11 +205,24 @@ public class EventosSwing {
     }
   }
 
+  public static class CampoId extends JTextField {
+    public CampoId() {
+      construtor.setId(this);
+      setBounds(290, 423, 200, 50);
+      setBorder(BorderFactory.createTitledBorder("ID do Evento"));
+      setFont(new Font("Arial", Font.PLAIN, 14));
+      setForeground(Color.black);
+      setBackground(Color.white);
+      setCaretColor(Color.black);
+      setSelectionColor(Color.black);
+      setSelectedTextColor(Color.white);
+    }
+  }
+
   public static class Visualizar extends JPanel {
     private JTextArea textArea;
 
     public Visualizar(EventoDao eventoDao) {
-      setBounds(0, 0, 800, 600);
       setBackground(Color.white);
       setLayout(null);
 
@@ -191,7 +236,8 @@ public class EventosSwing {
       textArea.setEditable(false);
 
       JScrollPane scrollPane = new JScrollPane(textArea);
-      scrollPane.setBounds(290, 50, 450, 350);
+      scrollPane.setBounds(0, 0, 450, 350);
+      scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
       scrollPane.setBorder(BorderFactory.createTitledBorder("Eventos Cadastrados"));
 
       add(scrollPane);
@@ -199,30 +245,6 @@ public class EventosSwing {
 
     public JTextArea getTextArea() {
       return textArea;
-    }
-  }
-
-  public static class BotaoVisualizar extends JButton {
-    public BotaoVisualizar() {
-      setBounds(300, 450, 100, 40);
-      setFont(new Font("Arial", Font.PLAIN, 14));
-      setForeground(Color.white);
-      setBackground(Color.black);
-      setBorder(BorderFactory.createEtchedBorder());
-      setText("Visualizar");
-      setFocusable(false);
-    }
-  }
-
-  public static class BotaoAtualizar extends JButton {
-    public BotaoAtualizar() {
-      setBounds(50, 450, 100, 40);
-      setFont(new Font("Arial", Font.PLAIN, 14));
-      setForeground(Color.white);
-      setBackground(Color.black);
-      setBorder(BorderFactory.createEtchedBorder());
-      setText("Atualizar");
-      setFocusable(false);
     }
   }
 }
