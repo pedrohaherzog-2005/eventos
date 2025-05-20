@@ -7,7 +7,7 @@ import events.dao.Crud;
 public class Evento {
   Scanner scanner = new Scanner(System.in);
   int eventoEscolha = 0;
-  Crud actions = new EventoDao();
+  Crud actions = new EventoDao(null);
   public void run() {
     actions.Conexao();
     do {

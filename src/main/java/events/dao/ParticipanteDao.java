@@ -5,81 +5,36 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Scanner;
+
+import javax.swing.JTextArea;
 
 import events.dao.Contrutores.ParticipanteConstrutor;
 
 public class ParticipanteDao implements Crud {
-  Scanner scanner = new Scanner(System.in);
-  ParticipanteConstrutor construtor = new ParticipanteConstrutor();
   private String conexao;
+  public ParticipanteConstrutor construtor;
+
+  public ParticipanteDao(ParticipanteConstrutor construtor) {
+    this.construtor = construtor;
+  }
 
   @Override
   public void Conexao() {
-    this.conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\banco";
+    this.conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\banco";
   }
 
   @Override
   public void Inserir() {
-    String nome;
-    do {
-      System.out.print("\nCadastre participante [Nome]: ");
-      nome = scanner.nextLine();
-      if (nome.trim().isEmpty()) {
-        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
-      }
-    } while (nome.trim().isEmpty());
-    this.construtor.setNome(nome);
-
-    String cpf;
-    do {
-      System.out.print("\nCadastre participante [Cpf]: ");
-      cpf = scanner.nextLine();
-      if (cpf.trim().isEmpty()) {
-        System.err.print("\nCPF não pode ser vazio! Tente novamente.\n");
-      }
-    } while (cpf.trim().isEmpty());
-    this.construtor.setCpf(cpf);
-
-    String dt_nascimento;
-    do {
-      System.out.print("\nCadastre participante [Data nascimento]: ");
-      dt_nascimento = scanner.nextLine();
-      if (dt_nascimento.trim().isEmpty()) {
-        System.err.print("\nData de nascimento não pode ser vazia! Tente novamente.\n");
-      }
-    } while (dt_nascimento.trim().isEmpty());
-    this.construtor.setDt_nascimento(dt_nascimento);
-
-    String sexo;
-    do {
-      System.out.print("\nCadastre participante [Sexo]: ");
-      sexo = scanner.nextLine();
-      if (sexo.trim().isEmpty()) {
-        System.err.print("\nSexo não pode ser vazio! Tente novamente.\n");
-      }
-    } while (sexo.trim().isEmpty());
-    this.construtor.setSexo(sexo);
-
-    String inscricao;
-    do {
-      System.out.print("\nCadastre participante [Id evento]: ");
-      inscricao = scanner.nextLine();
-      if (inscricao.trim().isEmpty()) {
-        System.err.print("\nID do evento não pode ser vazio! Tente novamente.\n");
-      }
-    } while (inscricao.trim().isEmpty());
-    this.construtor.setInscricao(inscricao);
 
     try {
       String sqlInsert = "INSERT INTO participante (nome, cpf, dt_nascimento, sexo, inscricao) VALUES (?, ?, ?, ?, ?)";
       Connection conn = DriverManager.getConnection(this.conexao);
       PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
-      pStatement.setString(1, this.construtor.getNome());
-      pStatement.setString(2, this.construtor.getCpf());
-      pStatement.setString(3, this.construtor.getDt_nascimento());
-      pStatement.setString(4, this.construtor.getSexo());
-      pStatement.setString(5, this.construtor.getInscricao());
+      pStatement.setString(1, this.construtor.getNome().getText());
+      pStatement.setString(2, this.construtor.getCpf().getText());
+      pStatement.setString(3, this.construtor.getDt_nascimento().getText());
+      pStatement.setString(4, this.construtor.getSexo().getText());
+      pStatement.setString(5, this.construtor.getInscricao().getText());
       System.out.println("Resposta: " + pStatement.executeUpdate());
       pStatement.close();
       conn.close();
@@ -93,85 +48,17 @@ public class ParticipanteDao implements Crud {
 
   @Override
   public void Atualizar() {
-    int id;
-    while (true) {
-      System.out.print("\nInforme o id do participante: ");
-      try {
-        if (scanner.hasNextInt()) {
-          id = scanner.nextInt();
-          scanner.nextLine();
-          break;
-        } else {
-          System.err.print("\nEntrada inválida! Insira um número.\n");
-          scanner.next();
-        }
-      } catch (Exception e) {
-        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
-        scanner.nextLine();
-      }
-    }
-    this.construtor.setId(id);
-
-    String nome;
-    do {
-      System.out.print("\nAtualize participante [Nome]: ");
-      nome = scanner.nextLine();
-      if (nome.trim().isEmpty()) {
-        System.err.print("\nNome não pode ser vazio! Tente novamente.\n");
-      }
-    } while (nome.trim().isEmpty());
-    this.construtor.setNome(nome);
-
-    String cpf;
-    do {
-      System.out.print("\nAtualize participante [Cpf]: ");
-      cpf = scanner.nextLine();
-      if (cpf.trim().isEmpty()) {
-        System.err.print("\nCPF não pode ser vazio! Tente novamente.\n");
-      }
-    } while (cpf.trim().isEmpty());
-    this.construtor.setCpf(cpf);
-
-    String dt_nascimento;
-    do {
-      System.out.print("\nAtualize participante [Data nascimento]: ");
-      dt_nascimento = scanner.nextLine();
-      if (dt_nascimento.trim().isEmpty()) {
-        System.err.print("\nData de nascimento não pode ser vazia! Tente novamente.\n");
-      }
-    } while (dt_nascimento.trim().isEmpty());
-    this.construtor.setDt_nascimento(dt_nascimento);
-
-    String sexo;
-    do {
-      System.out.print("\nAtualize participante [Sexo]: ");
-      sexo = scanner.nextLine();
-      if (sexo.trim().isEmpty()) {
-        System.err.print("\nSexo não pode ser vazio! Tente novamente.\n");
-      }
-    } while (sexo.trim().isEmpty());
-    this.construtor.setSexo(sexo);
-
-    String inscricao;
-    do {
-      System.out.print("\nAtualize participante [Id evento]: ");
-      inscricao = scanner.nextLine();
-      if (inscricao.trim().isEmpty()) {
-        System.err.print("\nID do evento não pode ser vazio! Tente novamente.\n");
-      }
-    } while (inscricao.trim().isEmpty());
-    this.construtor.setInscricao(inscricao);
-
+    
     try {
       String sqlUpdate = "UPDATE participante SET nome = ?, cpf = ?, dt_nascimento = ?, sexo = ?, inscricao = ? WHERE id = ?";
       Connection conn = DriverManager.getConnection(this.conexao);
       PreparedStatement pStatement = conn.prepareStatement(sqlUpdate);
-      pStatement.setString(1, this.construtor.getNome());
-      pStatement.setString(2, this.construtor.getCpf());
-      pStatement.setString(3, this.construtor.getDt_nascimento());
-      pStatement.setString(4, this.construtor.getSexo());
-      pStatement.setString(5, this.construtor.getInscricao());
-      pStatement.setInt(6, (int) this.construtor.getId());
+      pStatement.setString(1, this.construtor.getNome().getText());
+      pStatement.setString(2, this.construtor.getCpf().getText());
+      pStatement.setString(3, this.construtor.getDt_nascimento().getText());
+      pStatement.setString(4, this.construtor.getSexo().getText());
+      pStatement.setString(5, this.construtor.getInscricao().getText());
+      pStatement.setInt(7, Integer.parseInt(this.construtor.getId().getText()));
       System.out.println("Resposta: " + pStatement.executeUpdate());
       pStatement.close();
       conn.close();
@@ -185,30 +72,12 @@ public class ParticipanteDao implements Crud {
 
   @Override
   public void Excluir() {
-    int id;
-    while (true) {
-      System.out.print("\nApagar participante [Id]: ");
-      try {
-        if (scanner.hasNextInt()) {
-          id = scanner.nextInt();
-          scanner.nextLine();
-          break;
-        } else {
-          System.err.print("\nEntrada inválida! Insira um número.\n");
-          scanner.next();
-        }
-      } catch (Exception e) {
-        System.err.print("\nErro ao ler entrada! Tente novamente.\n");
-        scanner.nextLine();
-      }
-    }
-    this.construtor.setId(id);
 
     try {
       String sqlDelete = "DELETE FROM participante WHERE id = ?";
       Connection conn = DriverManager.getConnection(this.conexao);
       PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
-      pStatement.setInt(1, (int) this.construtor.getId());
+      pStatement.setInt(1, Integer.parseInt(this.construtor.getId().getText()));
       System.out.println("Resposta: " + pStatement.executeUpdate());
       pStatement.close();
       conn.close();
@@ -244,6 +113,31 @@ public class ParticipanteDao implements Crud {
       System.out.println("Erro ao listar participantes! " + e.getMessage());
       e.printStackTrace();
       System.out.println("Erro");
+    }
+  }
+
+  public void Leitura(JTextArea textArea) {
+    StringBuilder sb = new StringBuilder();
+    try {
+      String sqlSelect = "SELECT ppp.id, ppp.nome, ppp.cpf, ppp.dt_nascimento, ppp.sexo, ppp.inscricao FROM participante ppp";
+      Connection conn = DriverManager.getConnection(this.conexao);
+      Statement statement = conn.createStatement();
+      ResultSet rs = statement.executeQuery(sqlSelect);
+      while (rs.next()) {
+        sb.append("Id: ").append(rs.getInt("id")).append("\n");
+        sb.append("Nome: ").append(rs.getString("nome")).append("\n");
+        sb.append("CPF: ").append(rs.getString("cpf")).append("\n");
+        sb.append("Data de Nascimento: ").append(rs.getString("dt_nascimento")).append("\n");
+        sb.append("Sexo: ").append(rs.getString("sexo")).append("\n");
+        sb.append("Inscrição: ").append(rs.getString("inscricao")).append("\n\n");
+      }
+      textArea.setText(sb.toString());
+      rs.close();
+      statement.close();
+      conn.close();
+    } catch (Exception e) {
+      textArea.setText("Erro ao listar participantes! " + e.getMessage());
+      e.printStackTrace();
     }
   }
 }
