@@ -1,26 +1,15 @@
 package events.swing;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import events.dao.ParticipanteDao;
-import events.dao.propriedades.Menu.Head;
 import events.dao.Contrutores.ParticipanteConstrutor;
 
 public class ParticipanteSwing {
     static ParticipanteConstrutor construtor = new ParticipanteConstrutor();
     static ParticipanteDao participanteDao = new ParticipanteDao(construtor);
-
-    public static void main(String[] args) {
-        ParticipanteFrame pFrame = new ParticipanteFrame();
-        pFrame.setVisible(true);
-    }
 
     public static class ParticipanteFrame extends JFrame {
         public ParticipanteFrame() {
@@ -31,113 +20,201 @@ public class ParticipanteSwing {
             setResizable(false);
             setLayout(null);
 
-            Head head = new Head();
+            JPanel head = new JPanel();
             head.setBounds(0, 0, 800, 50);
-            head.setBackground(Color.BLACK);
-            add(head);
+            head.setLayout(null);
+            head.setBackground(Color.black);
 
-            Body body = new Body();
-            add(body);
-        }
-    }
+            JLabel eventos = new JLabel("Eventos");
+            eventos.setFont(new Font("Arial", Font.BOLD, 16));
+            eventos.setBounds(450, 10, 100, 30);
+            eventos.setForeground(Color.white);
+            eventos.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    events.swing.EventosSwing.Evento tela = new events.swing.EventosSwing.Evento();
+                    tela.setVisible(true);
+                    ParticipanteFrame.this.dispose();
+                }
 
-    public static class Body extends JPanel {
-        public Body() {
-            setBounds(0, 50, 800, 550);
-            setBackground(Color.WHITE);
-            setLayout(null);
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    eventos.setForeground(Color.YELLOW);
+                    eventos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
 
-            CampoNome campoNome = new CampoNome();
-            add(campoNome);
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    eventos.setForeground(Color.WHITE);
+                }
+            });
 
-            CampoCPF campoCPF = new CampoCPF();
-            add(campoCPF);
+            JLabel palestrante = new JLabel("Palestrante");
+            palestrante.setFont(new Font("Arial", Font.BOLD, 16));
+            palestrante.setBounds(540, 10, 100, 30);
+            palestrante.setForeground(Color.white);
+            palestrante.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    events.swing.PalestranteSwing.PalestranteFrame pFrame = new events.swing.PalestranteSwing.PalestranteFrame();
+                    pFrame.setVisible(true);
+                    ParticipanteFrame.this.dispose();
+                }
 
-            CampoDtNascimento campoDtNascimento = new CampoDtNascimento();
-            add(campoDtNascimento);
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    palestrante.setForeground(Color.YELLOW);
+                    palestrante.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
 
-            CampoSexo campoSexo = new CampoSexo();
-            add(campoSexo);
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    palestrante.setForeground(Color.WHITE);
+                }
+            });
 
-            CampoInscricao campoInscricao = new CampoInscricao();
-            add(campoInscricao);
+            JLabel participante = new JLabel("Participante");
+            participante.setFont(new Font("Arial", Font.BOLD, 16));
+            participante.setBounds(650, 10, 100, 30);
+            participante.setForeground(Color.YELLOW);
+
+            JPanel body = new JPanel();
+            body.setBounds(0, 50, 800, 550);
+            body.setBackground(Color.white);
+            body.setLayout(null);
+
+            JTextField campoNome = new JTextField();
+            construtor.setNome(campoNome);
+            campoNome.setBounds(50, 50, 200, 50);
+            campoNome.setBorder(BorderFactory.createTitledBorder("Nome do Participante"));
+            campoNome.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoNome.setForeground(Color.black);
+            campoNome.setBackground(Color.white);
+            campoNome.setCaretColor(Color.black);
+            campoNome.setSelectionColor(Color.black);
+            campoNome.setSelectedTextColor(Color.white);
+
+            JTextField campoCPF = new JTextField();
+            construtor.setCpf(campoCPF);
+            campoCPF.setBounds(50, 110, 200, 50);
+            campoCPF.setBorder(BorderFactory.createTitledBorder("CPF do Participante"));
+            campoCPF.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoCPF.setForeground(Color.black);
+            campoCPF.setBackground(Color.white);
+            campoCPF.setCaretColor(Color.black);
+            campoCPF.setSelectionColor(Color.black);
+            campoCPF.setSelectedTextColor(Color.white);
+
+            JTextField campoDtNascimento = new JTextField();
+            construtor.setDt_nascimento(campoDtNascimento);
+            campoDtNascimento.setBounds(50, 170, 200, 50);
+            campoDtNascimento.setBorder(BorderFactory.createTitledBorder("Data de Nascimento"));
+            campoDtNascimento.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoDtNascimento.setForeground(Color.black);
+            campoDtNascimento.setBackground(Color.white);
+            campoDtNascimento.setCaretColor(Color.black);
+            campoDtNascimento.setSelectionColor(Color.black);
+            campoDtNascimento.setSelectedTextColor(Color.white);
+
+            JTextField campoSexo = new JTextField();
+            construtor.setSexo(campoSexo);
+            campoSexo.setBounds(50, 230, 200, 50);
+            campoSexo.setBorder(BorderFactory.createTitledBorder("Sexo"));
+            campoSexo.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoSexo.setForeground(Color.black);
+            campoSexo.setBackground(Color.white);
+            campoSexo.setCaretColor(Color.black);
+            campoSexo.setSelectionColor(Color.black);
+            campoSexo.setSelectedTextColor(Color.white);
+
+            JTextField campoInscricao = new JTextField();
+            construtor.setInscricao(campoInscricao);
+            campoInscricao.setBounds(50, 290, 200, 50);
+            campoInscricao.setBorder(BorderFactory.createTitledBorder("Inscrição"));
+            campoInscricao.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoInscricao.setForeground(Color.black);
+            campoInscricao.setBackground(Color.white);
+            campoInscricao.setCaretColor(Color.black);
+            campoInscricao.setSelectionColor(Color.black);
+            campoInscricao.setSelectedTextColor(Color.white);
+
+            JTextField campoId = new JTextField();
+            construtor.setId(campoId);
+            campoId.setBounds(290, 423, 200, 50);
+            campoId.setBorder(BorderFactory.createTitledBorder("ID do Participante"));
+            campoId.setFont(new Font("Arial", Font.PLAIN, 14));
+            campoId.setForeground(Color.black);
+            campoId.setBackground(Color.white);
+            campoId.setCaretColor(Color.black);
+            campoId.setSelectionColor(Color.black);
+            campoId.setSelectedTextColor(Color.white);
 
             JButton botaoSalvar = new JButton("Salvar");
-            botaoSalvar.setBounds(50, 450, 100, 40);
+            botaoSalvar.setBounds(50, 430, 90, 40);
             botaoSalvar.setFont(new Font("Arial", Font.PLAIN, 14));
             botaoSalvar.setForeground(Color.white);
             botaoSalvar.setBackground(Color.black);
             botaoSalvar.setBorder(BorderFactory.createEtchedBorder());
             botaoSalvar.setFocusable(false);
             botaoSalvar.addActionListener(e -> {
-                ParticipanteDao participanteDao = new ParticipanteDao(construtor);
                 participanteDao.Conexao();
                 participanteDao.Inserir();
             });
-            add(botaoSalvar);
 
             Visualizar visualizar = new Visualizar(participanteDao);
-            BotaoVisualizar botaoVisualizar = new BotaoVisualizar();
+            JButton botaoVisualizar = new JButton("Visualizar");
+            botaoVisualizar.setBounds(160, 430, 90, 40);
+            botaoVisualizar.setFont(new Font("Arial", Font.PLAIN, 14));
+            botaoVisualizar.setForeground(Color.white);
+            botaoVisualizar.setBackground(Color.black);
+            botaoVisualizar.setBorder(BorderFactory.createEtchedBorder());
+            botaoVisualizar.setFocusable(false);
             botaoVisualizar.addActionListener(e -> {
                 participanteDao.Conexao();
                 participanteDao.Leitura(visualizar.getTextArea());
             });
-            add(visualizar);
-        }
-    }
 
-    public static class CampoNome extends JTextField {
-        public CampoNome() {
-            setBounds(50, 50, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.black);
-            setBackground(Color.white);
-            setBorder(BorderFactory.createTitledBorder("Nome do Participante"));
-            construtor.setNome(this);
-        }
-    }
+            JButton botaoAtualizar = new JButton("Atualizar");
+            botaoAtualizar.setBounds(510, 430, 120, 40);
+            botaoAtualizar.setFont(new Font("Arial", Font.BOLD, 14));
+            botaoAtualizar.setForeground(Color.white);
+            botaoAtualizar.setBackground(Color.black);
+            botaoAtualizar.setBorder(BorderFactory.createEtchedBorder());
+            botaoAtualizar.setFocusable(false);
+            botaoAtualizar.addActionListener(e -> {
+                participanteDao.Conexao();
+                participanteDao.Atualizar();
+            });
 
-    public static class CampoCPF extends JTextField {
-        public CampoCPF() {
-            setBounds(50, 110, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.black);
-            setBackground(Color.white);
-            setBorder(BorderFactory.createTitledBorder("CPF do Participante"));
-            construtor.setCpf(this);
-        }
-    }
+            JButton botaoExcluir = new JButton("Excluir");
+            botaoExcluir.setBounds(640, 430, 120, 40);
+            botaoExcluir.setFont(new Font("Arial", Font.BOLD, 14));
+            botaoExcluir.setForeground(Color.white);
+            botaoExcluir.setBackground(Color.black);
+            botaoExcluir.setBorder(BorderFactory.createEtchedBorder());
+            botaoExcluir.setFocusable(false);
+            botaoExcluir.addActionListener(e -> {
+                participanteDao.Conexao();
+                participanteDao.Excluir();
+            });
+            visualizar.setBounds(290, 50, 450, 350);
 
-    public static class CampoDtNascimento extends JTextField {
-        public CampoDtNascimento() {
-            setBounds(50, 170, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.black);
-            setBackground(Color.white);
-            setBorder(BorderFactory.createTitledBorder("Data de Nascimento do Participante"));
-            construtor.setDt_nascimento(this);
-        }
-    }
-
-    public static class CampoSexo extends JTextField {
-        public CampoSexo() {
-            setBounds(50, 230, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.black);
-            setBackground(Color.white);
-            setBorder(BorderFactory.createTitledBorder("Sexo do Participante"));
-            construtor.setSexo(this);
-        }
-    }
-
-    public static class CampoInscricao extends JTextField {
-        public CampoInscricao() {
-            setBounds(50, 290, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.black);
-            setBackground(Color.white);
-            setBorder(BorderFactory.createTitledBorder("Inscrição do Participante"));
-            construtor.setInscricao(this);
+            body.add(campoNome);
+            body.add(campoCPF);
+            body.add(campoDtNascimento);
+            body.add(campoSexo);
+            body.add(campoInscricao);
+            body.add(campoId);
+            body.add(botaoSalvar);
+            body.add(botaoVisualizar);
+            body.add(botaoAtualizar);
+            body.add(botaoExcluir);
+            body.add(visualizar);
+            head.add(eventos);
+            head.add(palestrante);
+            head.add(participante);
+            add(head);
+            add(body);
         }
     }
 
@@ -145,9 +222,9 @@ public class ParticipanteSwing {
         private JTextArea textArea;
 
         public Visualizar(ParticipanteDao participanteDao) {
-            setBounds(0, 0, 800, 600);
-            setBackground(Color.white);
             setLayout(null);
+            setBackground(Color.white);
+            setBounds(290, 50, 450, 350);
 
             textArea = new JTextArea();
             textArea.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -159,26 +236,13 @@ public class ParticipanteSwing {
             textArea.setEditable(false);
 
             JScrollPane scrollPane = new JScrollPane(textArea);
-            scrollPane.setBounds(290, 50, 450, 350);
+            scrollPane.setBounds(0, 0, 450, 350);
             scrollPane.setBorder(BorderFactory.createTitledBorder("Participantes Cadastrados"));
             add(scrollPane);
         }
 
         public JTextArea getTextArea() {
             return textArea;
-        }
-    }
-
-    // Adicione esta classe se não existir
-    public static class BotaoVisualizar extends JButton {
-        public BotaoVisualizar() {
-            super("Visualizar");
-            setBounds(50, 370, 200, 50);
-            setFont(new Font("Arial", Font.PLAIN, 14));
-            setForeground(Color.white);
-            setBackground(Color.black);
-            setBorder(BorderFactory.createEtchedBorder());
-            setFocusable(false);
         }
     }
 }
