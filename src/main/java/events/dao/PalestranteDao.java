@@ -53,14 +53,48 @@ public class PalestranteDao implements Crud {
   @Override
   public void Atualizar() {
     try {
-      String sqlUpdate = "UPDATE palestrante SET nome = ?, curriculo = ?, atuacao = ?, evento = ? WHERE id = ?";
+      String idStr = this.construtor.getId().getText();
+      if (idStr == null || idStr.trim().isEmpty()) {
+        throw new IllegalArgumentException("O campo ID não pode estar vazio!");
+      }
+      int id = Integer.parseInt(idStr);
+
+      String sqlSelect = "SELECT * FROM palestrante WHERE id = ?";
       Connection conn = DriverManager.getConnection(this.conexao);
+      PreparedStatement selectStmt = conn.prepareStatement(sqlSelect);
+      selectStmt.setInt(1, id);
+      ResultSet rs = selectStmt.executeQuery();
+
+      if (!rs.next()) {
+        throw new IllegalArgumentException("Palestrante não encontrado para o ID informado!");
+      }
+
+      String nome = this.construtor.getNome().getText().trim();
+      if (nome.isEmpty())
+        nome = rs.getString("nome");
+
+      String curriculo = this.construtor.getCurriculo().getText().trim();
+      if (curriculo.isEmpty())
+        curriculo = rs.getString("curriculo");
+
+      String atuacao = this.construtor.getAtuacao().getText().trim();
+      if (atuacao.isEmpty())
+        atuacao = rs.getString("atuacao");
+
+      String eventoStr = this.construtor.getEvento().getText().trim();
+      int evento = eventoStr.isEmpty() ? rs.getInt("evento") : Integer.parseInt(eventoStr);
+
+      rs.close();
+      selectStmt.close();
+
+      String sqlUpdate = "UPDATE palestrante SET nome = ?, curriculo = ?, atuacao = ?, evento = ? WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(sqlUpdate);
-      pStatement.setString(1, this.construtor.getNome().getText());
-      pStatement.setString(2, this.construtor.getCurriculo().getText());
-      pStatement.setString(3, this.construtor.getAtuacao().getText());
-      pStatement.setString(4, this.construtor.getEvento().getText());
-      pStatement.setInt(5, Integer.parseInt(this.construtor.getId().getText()));
+      pStatement.setString(1, nome);
+      pStatement.setString(2, curriculo);
+      pStatement.setString(3, atuacao);
+      pStatement.setInt(4, evento);
+      pStatement.setInt(5, id);
+
       System.out.println("Resposta: " + pStatement.executeUpdate());
       pStatement.close();
       conn.close();

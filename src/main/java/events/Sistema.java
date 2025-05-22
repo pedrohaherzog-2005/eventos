@@ -1,85 +1,111 @@
 package events;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
-import events.dao.propriedades.Menu.Head;
+import events.swing.EventosSwing;
+import events.swing.PalestranteSwing;
+import events.swing.ParticipanteSwing;
 
-public class Sistema {
+public class Sistema extends JFrame {
   public static void main(String[] args) {
-    Tela tela = new Tela();
-    tela.setVisible(true);
-  }
+    JFrame frame = new JFrame("Sistema de Eventos");
+    frame.setSize(800, 600);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
+    frame.setLayout(null);
+    frame.setBackground(Color.white);
+    frame.setVisible(true);
 
-  public static class Tela extends JFrame {
-    public Tela() {
-      setTitle("Sistema de Eventos");
-      setSize(800, 600);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setLocationRelativeTo(null);
-      setResizable(false);
-      setLayout(null);
+    JPanel head = new JPanel();
+    head.setBounds(0, 0, 800, 50);
+    head.setLayout(null);
+    head.setBackground(Color.black);
 
-      Head head = new Head();
-      head.setBounds(0, 0, 800, 50);
-      Body body = new Body();
-      //head.setBounds(0, 0, 800, 50);
-      body.setBounds(0, 50, 800, 550);
-      head.setBackground(Color.black);
-      body.setBackground(Color.white);
-      add(head);
-      add(body);
-    }
-  }
+    JLabel eventos = new JLabel("Eventos");
+    eventos.setFont(new Font("Arial", Font.BOLD, 16));
+    eventos.setBounds(450, 10, 100, 30);
+    eventos.setForeground(Color.white);
 
-  public static class Body extends JPanel {
-    public Body() {
-      setBounds(0, 50, 800, 550);
-      setBackground(Color.white);
-      setLayout(null);
+    eventos.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        EventosSwing.Evento tela = new EventosSwing.Evento();
+        tela.setVisible(true);
+        frame.dispose();
+      }
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        eventos.setForeground(Color.YELLOW);
+        eventos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      }
+      @Override
+      public void mouseExited(MouseEvent e) {
+        eventos.setForeground(Color.WHITE);
+      }
+    });
 
-      Titulo titulo = new Titulo();
-      titulo.setBounds(300, 200, 200, 30);
-      add(titulo);
-    }
-  }
+    JLabel palestrante = new JLabel("Palestrante");
+    palestrante.setFont(new Font("Arial", Font.BOLD, 16));
+    palestrante.setBounds(540, 10, 100, 30);
+    palestrante.setForeground(Color.white);
+    palestrante.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        PalestranteSwing.PalestranteFrame pFrame = new PalestranteSwing.PalestranteFrame();
+        pFrame.setVisible(true);
+        frame.dispose();
+      }
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        palestrante.setForeground(Color.YELLOW);
+        palestrante.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      }
+      @Override
+      public void mouseExited(MouseEvent e) {
+        palestrante.setForeground(Color.WHITE);
+      }
+    });
 
-  public static class Titulo extends JLabel {
-    public Titulo() {
-      setText("Sistema de Eventos");
-      setFont(new Font("Arial", Font.BOLD, 18));
-      setForeground(Color.BLACK);
-    }
-  }
+    JLabel participante = new JLabel("Participante");
+    participante.setFont(new Font("Arial", Font.BOLD, 16));
+    participante.setBounds(650, 10, 100, 30);
+    participante.setForeground(Color.white);
+    participante.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        ParticipanteSwing.ParticipanteFrame pFrame = new ParticipanteSwing.ParticipanteFrame();
+        pFrame.setVisible(true);
+        frame.dispose();
+      }
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        participante.setForeground(Color.YELLOW);
+        participante.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      }
+      @Override
+      public void mouseExited(MouseEvent e) {
+        participante.setForeground(Color.WHITE);
+      }
+    });
 
-  public static class UrlEventos extends JLabel {
-    public UrlEventos() {
-      setText("Eventos");
-      setFont(new Font("Arial", Font.BOLD, 14));
-      setForeground(Color.WHITE);
-    }
-  }
+    JPanel body = new JPanel();
+    body.setBounds(0, 50, 800, 550);
+    body.setBackground(Color.white);
+    body.setLayout(null);
 
-  public static class UrlPalestrante extends JLabel {
-    public UrlPalestrante() {
-      setText("Palestrantes");
-      setFont(new Font("Arial", Font.BOLD, 14));
-      setForeground(Color.WHITE);
-    }
-  }
+    JLabel nome = new JLabel("Sistema de Eventos");
+    nome.setFont(new Font("Arial", Font.BOLD, 20));
+    nome.setBounds(300, 250, 250 , 60);
+    nome.setForeground(Color.black);
 
-  public static class UrlParticipante extends JLabel {
-    public UrlParticipante() {
-      setText("Participantes");
-      setFont(new Font("Arial", Font.BOLD, 14));
-      setForeground(Color.WHITE);
-    }
-  }
-
-  public static class Versao extends JLabel {
-    public Versao() {
-      setText("Versão 1.0");
-      setFont(new Font("Arial", Font.BOLD, 14));
-      setForeground(Color.WHITE);
-    }
+    head.add(eventos);
+    head.add(palestrante);
+    head.add(participante);
+    frame.add(nome);
+    frame.add(head);
+    frame.add(body);
   }
 }

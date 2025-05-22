@@ -1,67 +1,68 @@
 package events.dao.contrutores;
 
-public class ParticipanteConstrutor {
-  private String nome;
-  private String cpf;
-  private String dt_nascimento;
-  private String sexo;
-  private String inscricao;
-  private int id;
+import javax.swing.JTextField;
 
-  public void ctParticipante(String nome, String cpf, String dt_nascimento, String sexo, String inscricao, int id) {
+public class ParticipanteConstrutor {
+  private JTextField nome;
+  private JTextField cpf;
+  private JTextField dt_nascimento;
+  private JTextField sexo;
+  private JTextField inscricao;
+  private JTextField id;
+
+  public void ctParticipante(JTextField nome, JTextField cpf, JTextField dt_nascimento, JTextField sexo, JTextField inscricao, JTextField id) {
     this.nome = nome;
     this.cpf = cpf;
     this.dt_nascimento = dt_nascimento;
     this.sexo = sexo;
     this.inscricao = inscricao;
-    this.id = id;
   }
 
-  public String getNome() {
+  public JTextField getNome() {
     return nome;
   }
 
-  public void setNome(String nome) {
+  public void setNome(JTextField nome) {
     this.nome = nome;
   }
 
-  public String getCpf() {
+  public JTextField getCpf() {
     return cpf;
   }
 
-  public void setCpf(String cpf) {
+  public void setCpf(JTextField cpf) {
     this.cpf = cpf;
   }
 
-  public String getDt_nascimento() {
+  public JTextField getDt_nascimento() {
     return dt_nascimento;
   }
 
-  public void setDt_nascimento(String dt_nascimento) {
+  public void setDt_nascimento(JTextField dt_nascimento) {
     this.dt_nascimento = dt_nascimento;
   }
 
-  public String getSexo() {
+  public JTextField getSexo() {
     return sexo;
   }
 
-  public void setSexo(String sexo) {
+  public void setSexo(JTextField sexo) {
     this.sexo = sexo;
   }
 
-  public String getInscricao() {
+  public JTextField getInscricao() {
     return inscricao;
   }
 
-  public void setInscricao(String inscricao) {
+  public void setInscricao(JTextField inscricao) {
     this.inscricao = inscricao;
   }
 
-  public long getId() {
+  public JTextField getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(JTextField id) {
     this.id = id;
   }
 }

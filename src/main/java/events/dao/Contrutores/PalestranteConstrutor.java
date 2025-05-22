@@ -14,7 +14,6 @@ public class PalestranteConstrutor {
     this.curriculo = curriculo;
     this.atuacao = atuacao;
     this.evento = evento;
-    this.id = id;
   }
 
   public JTextField getId() {

@@ -47,16 +47,56 @@ public class EventoDao implements Crud {
   @Override
   public void Atualizar() {
     try {
-      String update = "UPDATE evento SET nome = ?, descricao = ?, data = ?, local = ?, capacidade = ?, palestrante = ? WHERE id = ?";
+      String idStr = this.construtor.getId().getText();
+      if (idStr == null || idStr.trim().isEmpty()) {
+        throw new IllegalArgumentException("O campo ID não pode estar vazio!");
+      }
+      int id = Integer.parseInt(idStr);
+
+      String sqlSelect = "SELECT * FROM evento WHERE id = ?";
       Connection conn = DriverManager.getConnection(this.conexao);
+      PreparedStatement selectStmt = conn.prepareStatement(sqlSelect);
+      selectStmt.setInt(1, id);
+      ResultSet rs = selectStmt.executeQuery();
+
+      if (!rs.next()) {
+        throw new IllegalArgumentException("Evento não encontrado para o ID informado!");
+      }
+
+      String nome = this.construtor.getNome().getText().trim();
+      if (nome.isEmpty())
+        nome = rs.getString("nome");
+
+      String descricao = this.construtor.getDescricao().getText().trim();
+      if (descricao.isEmpty())
+        descricao = rs.getString("descricao");
+
+      String data = this.construtor.getData().getText().trim();
+      if (data.isEmpty())
+        data = rs.getString("data");
+
+      String local = this.construtor.getLocal().getText().trim();
+      if (local.isEmpty())
+        local = rs.getString("local");
+
+      String capacidadeStr = this.construtor.getCapacidade().getText().trim();
+      int capacidade = capacidadeStr.isEmpty() ? rs.getInt("capacidade") : Integer.parseInt(capacidadeStr);
+      String palestranteStr = this.construtor.getPalestrante().getText().trim();
+      int palestrante = palestranteStr.isEmpty() ? rs.getInt("palestrante") : Integer.parseInt(palestranteStr);
+
+      rs.close();
+      selectStmt.close();
+
+      String update = "UPDATE evento SET nome = ?, descricao = ?, data = ?, local = ?, capacidade = ?, palestrante = ? WHERE id = ?";
       PreparedStatement pStatement = conn.prepareStatement(update);
-      pStatement.setString(1, this.construtor.getNome().getText());
-      pStatement.setString(2, this.construtor.getDescricao().getText());
-      pStatement.setString(3, this.construtor.getData().getText());
-      pStatement.setString(4, this.construtor.getLocal().getText());
-      pStatement.setInt(5, Integer.parseInt(this.construtor.getCapacidade().getText()));
-      pStatement.setInt(6, Integer.parseInt(this.construtor.getPalestrante().getText()));
-      pStatement.setInt(7, Integer.parseInt(this.construtor.getId().getText()));
+      pStatement.setString(1, nome);
+      pStatement.setString(2, descricao);
+      pStatement.setString(3, data);
+      pStatement.setString(4, local);
+      pStatement.setInt(5, capacidade);
+      pStatement.setInt(6, palestrante);
+      pStatement.setInt(7, id);
+
       System.out.println("Resposta: " + pStatement.executeUpdate());
       pStatement.close();
       conn.close();
