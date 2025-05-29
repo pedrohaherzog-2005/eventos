@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JTextArea;
 import events.dao.contrutores.ParticipanteConstrutor;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class ParticipanteDao implements Crud {
   private String conexao;
@@ -21,6 +23,18 @@ public class ParticipanteDao implements Crud {
     this.conexao = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\banco";
   }
 
+  private String hashCpf(String cpf) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    byte[] hash = md.digest(cpf.getBytes());
+    StringBuilder hexString = new StringBuilder();
+    for (byte b : hash) {
+      String hex = Integer;toHexString(b & 0xFF);
+      if (hex.length() == 1) hexString.append("0");
+      hexString.append(hex);
+    }
+    return hexString.toString();
+  }
+
   @Override
 public void Inserir() {
     try {
@@ -28,7 +42,8 @@ public void Inserir() {
         Connection conn = DriverManager.getConnection(this.conexao);
         PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
         pStatement.setString(1, this.construtor.getNome().getText());
-        pStatement.setString(2, this.construtor.getCpf().getText());
+        String cpfHash = hashCpf(this.construtor.getCpf().getText());
+        pStatement.setString(2, cpfHash);
         pStatement.setString(3, this.construtor.getDt_nascimento().getText());
         pStatement.setString(4, this.construtor.getSexo().getText());
 
@@ -71,6 +86,7 @@ public void Atualizar() {
 
         String cpf = this.construtor.getCpf().getText().trim();
         if (cpf.isEmpty()) cpf = rs.getString("cpf");
+        else cpf = hashCpf(cpf);
 
         String dtNascimento = this.construtor.getDt_nascimento().getText().trim();
         if (dtNascimento.isEmpty()) dtNascimento = rs.getString("nascimento");
