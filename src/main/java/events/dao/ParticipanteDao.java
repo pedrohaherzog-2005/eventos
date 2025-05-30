@@ -28,7 +28,7 @@ public class ParticipanteDao implements Crud {
     byte[] hash = md.digest(cpf.getBytes());
     StringBuilder hexString = new StringBuilder();
     for (byte b : hash) {
-      String hex = Integer;toHexString(b & 0xFF);
+      String hex = Integer.toHexString(b & 0xFF);
       if (hex.length() == 1) hexString.append("0");
       hexString.append(hex);
     }
